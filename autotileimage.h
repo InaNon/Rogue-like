@@ -22,6 +22,7 @@ public:
 	AutoTileImage();
 	~AutoTileImage();
 
+
 	//@Override
 	bool LoadHandle(int);
 	int GetGraphicHandle(int);
