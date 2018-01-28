@@ -1,0 +1,10 @@
+DEBUG {
+	ROOM_FLOOR	"image/floor.png"	0	0
+	ROAD_FLOOR	"image/floor.png"	0	0
+	BOX_WALL	"image/box_wall.png"	0	0
+	SLANT_WALL	"image/slant_wall.png"	0	0
+	ROOM_STEP	"image/floor.png"	1	0
+	ROAD_STEP	"image/floor.png"	1	0
+}
+
+

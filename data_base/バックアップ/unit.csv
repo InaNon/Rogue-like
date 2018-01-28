@@ -1,0 +1,5 @@
+name,explain,graph_name,max_hp,atk,def,speed,luk,exp
+ラビットマン,最大hpが少し上昇する,RabbitMan3.png,10,5,2,5,3,30
+くろねこ,hpが少し回復する,Golem_stone.png,5,3,5,5,5,20
+ゴーレム,hpが回復する,Cat_black.png,30,5,5,2,2,50
+end,,,,,,,,

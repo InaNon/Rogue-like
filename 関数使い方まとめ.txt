@@ -1,0 +1,131 @@
+/*AI関係*/
+	#include "sectionadmin.h"
+	#include "room.h"
+
+	Room* map_admin->GetSectionAdmin()->GetRoom(m_x, m_y)
+	マップ座標(m_x, m_y)について、そこが部屋の中であるならば部屋のポインタが返される。そうでないならNULLが返される。
+	以下の関数は、これがNULLでないことを確認してから使用すること。
+	なお、部屋の中とは下に示す範囲である
+
+	■■■□■■■■■■■
+	■■■○■■■■■■■
+	■■○○○○○○○■■
+	■■○○○○○○○○□
+	■■○○○○○○○■■
+	■■■■■○■■■■■
+	■■■■■□■■■■■
+
+	この部屋へのポインタを用いて、以下の関数群が使える
+
+	●部屋へのポインタを用いて使える関数
+	void ->GetEntranceCell_One(int* point, int i);
+	部屋に格納されている、i番目の通路入り口(通路内)の座標が、pointに格納される。
+	int point[3]を引数とすることで、point[0]にmx、point[1]にmy、
+	point[2]に、どの方向に通路があるかを示す方向( DIRECTIONをint型としたもの)が格納される。
+	この仕様は以下のGetEntranceCell_Rand関数においても同様である。
+	void ->GetEntranceCell_One(int i,int&rx ,int&ry ,DIRECTION& rcommand);
+	でも可
+
+
+	bool ->GetEntranceCell_Rand(int* point);
+	ランダムに、部屋に格納されている通路入り口(通路内)の座標が、pointに格納される。
+	返り値として、通路が見つからない時はfalseが返される。
+	bool ->GetEntranceCell_Rand(int&rx, int&ry, DIRECTION& rcommand);
+	でも可
+
+	bool ->GetEntranceCell_Rand(int* point, int mx ,int my);
+	(mx,my)を除外した中からランダムに、部屋に格納されている通路入り口(通路内)の座標が、pointに格納される。
+	返り値として、通路が見つからない時はfalseが返される。
+	bool ->GetEntranceCell_Rand(int mx, int my, int&rx, int&ry, DIRECTION& rcommand);
+	でも可
+
+	std::vector<std::vector<int>> ->GetEntranceCell_All();
+	部屋に格納されている通路入り口(通路内)の座標全てが返り値となる。返り値は、[?][3]の要素数を持つ。
+
+	int ->GetEntranceCell_Number(int mx, int my);
+	座標mx,myが、EntranceCellに格納されているならば、その番目を返す関数。
+	存在しない場合は-1が返される。
+	
+	●その他
+	bool map_admin->GetSectionAdmin()->GetEntranceSlantMovef(int start_mx, int start_my, int end_mx, int end_my, bool* rbool)
+	座標(start_mx,start_my)から、(end_mx,end_my)に最短経路で移動する際、最後の移動において、斜め移動が許されるかどうかを返す関数。
+	最短経路に斜め移動が含まれない場合は、falseが返される。適切な引数でない場合もfalseが返される。
+	void map_admin->GetSectionAdmin()->GetEntranceSlantMovef(int start_mx, int start_my, int end_mx, bool& start_f, bool& end_f);
+	も可
+
+
+/*マップ生成関係*/
+	#include "mapadmin.h"
+
+	void map_admin->MapInit()
+	現在のマップを削除し、新たにマップを生成する。
+	※ユニットやアイテムのスポーンを行う前に呼び出すこと。
+	※今後、引数によって、ダンジョンの複雑さ、部屋の数、マップ全体の大きさなどを指定できるようにする予定
+
+/*スポーン関係*/
+	#include "mapadmin.h"
+
+	void map_admin->GetRespawnCell(int* mx, int* my)
+	ランダムに、リスポーン可能なマスを返す関数
+	返り値は無く、引数にx,y座標のポインタを与えることで、そこに座標が代入される。
+	例
+	map_admin->GetRespawnCell(&spawn_x, &spawn_y);
+
+/*部屋関係*/
+	#include "sectionadmin.h"
+
+	Room* map_admin->GetSectionAdmin()->GetRandomRoom()
+	マップに存在する部屋のポインタをランダムに返す。確率は各部屋について等しく、部屋の大きさに依らない。
+
+	Room* map_admin->GetSectionAdmin()->GetRandomRoom_Square()
+	マップに存在する部屋のポインタをランダムに返す。確率は各部屋について部屋の大きさを重みにしている。
+
+	Room*から、以下の各関数によって、部屋の情報を得られる。ただし、#include "room.h"
+
+	int ->GetX()　部屋の左上のmx座標
+	int ->GetY()　部屋の左上のmy座標
+	int ->GetSizeX()　部屋のmx座標方向の大きさ
+	int ->GetSizeY()　部屋のmy座標方向の大きさ
+
+
+/*マス判定関係*/
+	#include "mapadmin.h"
+	#include "celldata.h"
+
+	●実用的な各マスの判定
+
+	bool map_admin->GetSpawnf_Conv(mx,my)
+	(mx,my)マスが、ユニットがスポーン可能かを返す関数。trueでスポーン可能
+
+	bool map_admin->GetMovef_Conv(mx,my,a,b)
+	bool map_admin->GetMovef_Conv(mx,my,COMMAND)
+	(mx1,my1)マスから(mx1+a,my1+b)マスに移動する場合に、
+	ユニットが移動可能かを返す関数。trueで移動可能。
+	a,bは-1,0,1のいずれかの値でなければならない。
+	a,bの代わりに、移動方向を表すCOMMANDでも良い
+
+	この関数は、自動的に斜め移動についても判定してくれる点で便利。
+	誤った使い方をした場合はfalseが返ってくるが、正常な判定の結果としてのfalseの場合と判別がつかないので注意
+
+
+	●各マスの判定
+
+	bool map_admin->GetCellData(mx,my)->GetMovef()
+	(mx,my)マスが、ユニットが移動可能かを返す関数。trueで移動可
+
+	map_admin->GetCellData(mx,my)->GetSlantMovef()
+	(mx,my)マスを脇にして、ユニットが斜め移動可能かを返す関数。trueで移動可
+
+	map_admin->GetCellData(mx,my)->GetStepf()
+	(mx,my)マスが、階段であるかを返す関数。trueで階段である。
+
+	map_admin->GetCellData(mx,my)->GetRoomf()
+	(mx,my)マスが、部屋の中のマスであるかを返す関数。trueで部屋の中のマスである。
+	Movef == falseのマスに対しては(今のところ)使えない
+
+	map_admin->GetCellData(mx,my)->GetTrapf()
+	(mx,my)マスが、トラップのあるマスであるかを返す関数。trueでトラップのあるマスである。
+
+	map_admin->GetCellData(mx,my)->GetShopf()
+	(mx,my)マスが、店のマスであるかを返す関数。trueで店のマスである。
+
