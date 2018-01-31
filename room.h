@@ -16,8 +16,6 @@ protected:
 	int sizex;
 	int sizey;
 
-	bool is_monsterhouse;
-
 	std::vector<std::vector<int>> entrance_cell;
 	/*
 	Å°Å°Å†Å°Å°Å°Å°
@@ -74,8 +72,6 @@ public:
 
 	int GetEntranceCellSize();
 
-	bool IsMonsterhouse();
-
 
 	std::vector<Room*> GetConnectionRoom();
 	Room* GetConnectionRoom(int);
@@ -88,8 +84,6 @@ public:
 
 	void SetSizeX(int);
 	void SetSizeY(int);
-
-	void SetIsMonsterhouse(bool);
 
 	//void SetConnectionf(bool);
 

@@ -6,6 +6,7 @@
 #include "selectboxadmin.h"
 #include "sectionadmin.h"
 #include "celldataadmin.h"
+#include "stageadmin.h"
 #include "camera.h"
 #include "loaddatabase.h"
 #include "ObjectDataAdmin.h"
@@ -19,6 +20,8 @@
 #include "equipmentadmin.h"
 #include "dungeondifficulty.h"
 #include "dungeondataadmin.h"
+#include "sounddataadmin.h"
+#include "sounddata.h"
 
 bool Process(char key[256]) {
 	if (ScreenFlip() != 0)return false;
@@ -59,6 +62,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	MessageAdmin* message_admin = new MessageAdmin();
 	Camera* camera = new Camera();
 	ObjectDataAdmin* object_data_admin = new ObjectDataAdmin();
+	SoundDataAdmin* sound_data_admin = new SoundDataAdmin();
 	LoadDataBase* load_data_base = new LoadDataBase();
 	EquipmentAdmin* equipment_admin = new EquipmentAdmin();
 	SelectBoxAdmin* select_box_admin = new SelectBoxAdmin();
@@ -83,7 +87,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	item_stock_admin->Init();
 	message_admin->Init(key, mode_manage);
 	object_data_admin->Init();
-	load_data_base->Init(object_data_admin);
+	load_data_base->Init(object_data_admin, sound_data_admin);
 	equipment_admin->Init();
 	select_box_admin->Init(key, unit_admin, item_admin, equipment_admin, mode_manage, item_stock_admin);
 	item_admin->Init(unit_admin, object_data_admin, map_admin, message_admin, select_box_admin);
@@ -95,9 +99,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	bool stage_flag = false;
 	int title = LoadGraph("image/title/title.bmp");
 
+
+
 	while(Process(key)){
 
 		DrawGraph(0, 0, title, false);
+
+		PlaySoundMem(sound_data_admin->GetSoundEffectData(0)->GetSoundHandle(), DX_PLAYTYPE_NORMAL);
 
 		for(int i = 0; i < 256; i++){
 			if (key[i] == 1) {

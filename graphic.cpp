@@ -104,8 +104,8 @@ void Graphic::DrawStatus(){
 	float green = 255 * hp_parsentage;
 	float red = 255 * (1 - hp_parsentage);
 
-	DrawBox(BAR_START_X-1, BAR_START_Y-1, BAR_START_X+MAX_BAR_LENGTH_X+1, BAR_START_Y+BAR_LENGTH_Y+1, GetColor(0,0,0), false);
-	DrawBox(BAR_START_X, BAR_START_Y, BAR_START_X+bar_length, BAR_START_Y+BAR_LENGTH_Y, GetColor(red,green,0), true);
+	DrawBoxAA(BAR_START_X-1, BAR_START_Y-1, BAR_START_X+MAX_BAR_LENGTH_X+1, BAR_START_Y+BAR_LENGTH_Y+1, GetColor(0,0,0), false);
+	DrawBoxAA(BAR_START_X, BAR_START_Y, BAR_START_X+bar_length, BAR_START_Y+BAR_LENGTH_Y, GetColor(red,green,0), true);
 
 	DrawFormatStringToHandle(BAR_START_X+1, BAR_START_Y+BAR_LENGTH_Y-HP_FONT_SIZE-1, GetColor(255,255,255), hp_font,"%d/%d", (int)current_hp, (int)max_hp);
 	DrawFormatStringToHandle(330, BAR_START_Y+3, GetColor(255, 255, 255), hp_font, "%dLv", level);

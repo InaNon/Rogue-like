@@ -52,7 +52,7 @@ public:
 	void AdvanceInit();
 	void Draw(Camera*);
 	void Update();
-	bool GetMovef(int, int);
+	bool GetMovef(int, int, COMMAND);
 	Unit* GetUnit(int);
 	Unit* UnitExistMap(int, int);
 	bool UnitReservationMapExist(int, int);

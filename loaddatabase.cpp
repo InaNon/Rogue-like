@@ -1,9 +1,12 @@
 #include "loaddatabase.h"
+
 #include "ObjectDataAdmin.h"
+#include "sounddataadmin.h"
 
-void LoadDataBase::Init(ObjectDataAdmin* m_object_data_admin) {
+void LoadDataBase::Init(ObjectDataAdmin* _object_data_admin, SoundDataAdmin* _sound_data_admin) {
 
-	object_data_admin = m_object_data_admin;
+	object_data_admin = _object_data_admin;
+	sound_data_admin = _sound_data_admin;
 	LoadData();
 }
 
@@ -53,7 +56,43 @@ void LoadDataBase::LoadData() {
 	}
 
 
+
+
+
+
+
+
+
+	/*
+	ifstream music_ifs("data_base/music.csv");
+	if (music_ifs.fail()) {
+		printfDx("fail loading database.");
+	}
+
+
+	getline(music_ifs, data_line);
+	while (object_data_admin->SplitLineSetStatusItemData(data_line)) {
+		getline(status_item_ifs, data_line);
+	}
+	*/
+
+
+	ifstream sound_effect_ifs("data_base/sound_effect.csv");
+	if (sound_effect_ifs.fail()) {
+		printfDx("fail loading database.");
+	}
+
+
+	getline(sound_effect_ifs, data_line);
+	while (sound_data_admin->SplitLineSetSoundEffectData(data_line)) {
+		getline(sound_effect_ifs, data_line);
+	}
+
+
 }
 
 LoadDataBase::LoadDataBase() {}
 LoadDataBase::~LoadDataBase(){}
+
+
+

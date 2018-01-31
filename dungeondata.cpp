@@ -30,15 +30,3 @@ void DungeonData::EmplaceFloorData(int i) {
 		floordata.emplace_back();
 	}
 }
-
-void DungeonData::PrintDungeonData(int i) {
-	printfDx("FloorsizeX %d\nFloorsizeY %d\nMakeroomNum[0] %d\nMakeroomNum[1] %d\nMakeroadRate %f\nTrapNum %d\nItemNum %d\nMonsterhouseRate %f\n",
-		GetFloorData(i)->GetFloorsizeX(),
-		GetFloorData(i)->GetFloorsizeY(),
-		GetFloorData(i)->GetMakeroomNum(0),
-		GetFloorData(i)->GetMakeroomNum(1),
-		GetFloorData(i)->GetMakeroadRate(),
-		GetFloorData(i)->GetTrapNum(),
-		GetFloorData(i)->GetItemNum(),
-		GetFloorData(i)->GetMonsterhouseRate());
-}

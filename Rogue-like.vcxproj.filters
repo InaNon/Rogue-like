@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\dungeon">
+      <UniqueIdentifier>{1540cdb5-3a2e-4d35-bc83-fcdba3ab13ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\text">
+      <UniqueIdentifier>{961142d1-8cb2-4ac5-affd-812f10d12b4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\database">
+      <UniqueIdentifier>{206f0604-fdc4-4937-9143-6193a5b3c52a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\text">
+      <UniqueIdentifier>{439232ea-8df1-4b39-9cfd-dcda24c8301c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dungeon">
+      <UniqueIdentifier>{739ba433-c1bc-4355-b995-fba5d88c6271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\database">
+      <UniqueIdentifier>{01f10347-029a-4e8a-bff4-997bf1a61648}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\object">
+      <UniqueIdentifier>{9b069249-fcff-4b1b-b5d6-b533a9ab5ee7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\object">
+      <UniqueIdentifier>{97b288e6-ada3-4f1f-97dc-f81f8360888c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\propety">
+      <UniqueIdentifier>{b5da3c56-19d8-4436-9037-a39f665a95d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\propety">
+      <UniqueIdentifier>{c50af3a1-180c-480c-95bd-d3254908abcf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="i_main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="listbox.cpp">
+      <Filter>Source Files\text</Filter>
+    </ClCompile>
+    <ClCompile Include="autocellimage.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="cell.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="celldata.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="celldataadmin.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="cellimage.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="makedungeon.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="makemapgraphic.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="mapadmin.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="section.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="status.cpp">
+      <Filter>Source Files\text</Filter>
+    </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>Source Files\text</Filter>
+    </ClCompile>
+    <ClCompile Include="message.cpp">
+      <Filter>Source Files\text</Filter>
+    </ClCompile>
+    <ClCompile Include="selectboxadmin.cpp">
+      <Filter>Source Files\text</Filter>
+    </ClCompile>
+    <ClCompile Include="selectbox.cpp">
+      <Filter>Source Files\text</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="unit.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="room.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="messageadmin.cpp">
+      <Filter>Source Files\text</Filter>
+    </ClCompile>
+    <ClCompile Include="unitadmin.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="loaddatabase.cpp">
+      <Filter>Source Files\database</Filter>
+    </ClCompile>
+    <ClCompile Include="itemdata.cpp">
+      <Filter>Source Files\database</Filter>
+    </ClCompile>
+    <ClCompile Include="statusitemdata.cpp">
+      <Filter>Source Files\database</Filter>
+    </ClCompile>
+    <ClCompile Include="minimap.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="trapdata.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="trapdataadmin.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="item.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="itemadmin.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="iteminventory.cpp">
+      <Filter>Source Files\text</Filter>
+    </ClCompile>
+    <ClCompile Include="drawdungeon.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="modemanage.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="artificialintelligence.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="unitdata.cpp">
+      <Filter>Source Files\database</Filter>
+    </ClCompile>
+    <ClCompile Include="objectdata.cpp">
+      <Filter>Source Files\database</Filter>
+    </ClCompile>
+    <ClCompile Include="graphic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="equipitemdata.cpp">
+      <Filter>Source Files\database</Filter>
+    </ClCompile>
+    <ClCompile Include="useitem.cpp">
+      <Filter>Source Files\text</Filter>
+    </ClCompile>
+    <ClCompile Include="itemstock.cpp">
+      <Filter>Source Files\propety</Filter>
+    </ClCompile>
+    <ClCompile Include="itemstockadmin.cpp">
+      <Filter>Source Files\propety</Filter>
+    </ClCompile>
+    <ClCompile Include="itemdeal.cpp">
+      <Filter>Source Files\propety</Filter>
+    </ClCompile>
+    <ClCompile Include="equipment.cpp">
+      <Filter>Source Files\propety</Filter>
+    </ClCompile>
+    <ClCompile Include="equipmentadmin.cpp">
+      <Filter>Source Files\propety</Filter>
+    </ClCompile>
+    <ClCompile Include="equipbox.cpp">
+      <Filter>Source Files\text</Filter>
+    </ClCompile>
+    <ClCompile Include="dungeondata.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="dungeondataadmin.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="dungeondifficulty.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="floordata.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="road.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="sectionadmin.cpp">
+      <Filter>Source Files\dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="putoff.cpp">
+      <Filter>Source Files\text</Filter>
+    </ClCompile>
+    <ClCompile Include="objectgenerator.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="objectdataadmin.cpp">
+      <Filter>Source Files\database</Filter>
+    </ClCompile>
+    <ClCompile Include="stagefloorobjectpropety.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="explain.cpp">
+      <Filter>Source Files\text</Filter>
+    </ClCompile>
+    <ClCompile Include="sounddataadmin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sounddata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="makedungeon.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="room.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="section.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="sectionadmin.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="cell.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="celldata.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="celldataadmin.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="makemapgraphic.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="mapadmin.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Header Files\text</Filter>
+    </ClInclude>
+    <ClInclude Include="message.h">
+      <Filter>Header Files\text</Filter>
+    </ClInclude>
+    <ClInclude Include="messageadmin.h">
+      <Filter>Header Files\text</Filter>
+    </ClInclude>
+    <ClInclude Include="status.h">
+      <Filter>Header Files\text</Filter>
+    </ClInclude>
+    <ClInclude Include="listbox.h">
+      <Filter>Header Files\text</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>Header Files\object</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Header Files\object</Filter>
+    </ClInclude>
+    <ClInclude Include="unit.h">
+      <Filter>Header Files\object</Filter>
+    </ClInclude>
+    <ClInclude Include="unitadmin.h">
+      <Filter>Header Files\object</Filter>
+    </ClInclude>
+    <ClInclude Include="selectbox.h">
+      <Filter>Header Files\text</Filter>
+    </ClInclude>
+    <ClInclude Include="selectboxadmin.h">
+      <Filter>Header Files\text</Filter>
+    </ClInclude>
+    <ClInclude Include="autocellimage.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="cellimage.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="itemdata.h">
+      <Filter>Header Files\database</Filter>
+    </ClInclude>
+    <ClInclude Include="statusitemdata.h">
+      <Filter>Header Files\database</Filter>
+    </ClInclude>
+    <ClInclude Include="loaddatabase.h">
+      <Filter>Header Files\database</Filter>
+    </ClInclude>
+    <ClInclude Include="minimap.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="trapdata.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="trapdataadmin.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="object.h">
+      <Filter>Header Files\object</Filter>
+    </ClInclude>
+    <ClInclude Include="item.h">
+      <Filter>Header Files\object</Filter>
+    </ClInclude>
+    <ClInclude Include="itemadmin.h">
+      <Filter>Header Files\object</Filter>
+    </ClInclude>
+    <ClInclude Include="drawdungeon.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="modemanage.h">
+      <Filter>Header Files\object</Filter>
+    </ClInclude>
+    <ClInclude Include="artificialintelligence.h">
+      <Filter>Header Files\object</Filter>
+    </ClInclude>
+    <ClInclude Include="unitdata.h">
+      <Filter>Header Files\database</Filter>
+    </ClInclude>
+    <ClInclude Include="objectdata.h">
+      <Filter>Header Files\database</Filter>
+    </ClInclude>
+    <ClInclude Include="graphic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="equipitemdata.h">
+      <Filter>Header Files\database</Filter>
+    </ClInclude>
+    <ClInclude Include="useitem.h">
+      <Filter>Header Files\text</Filter>
+    </ClInclude>
+    <ClInclude Include="itemdeal.h">
+      <Filter>Header Files\propety</Filter>
+    </ClInclude>
+    <ClInclude Include="itemstock.h">
+      <Filter>Header Files\propety</Filter>
+    </ClInclude>
+    <ClInclude Include="itemstockadmin.h">
+      <Filter>Header Files\propety</Filter>
+    </ClInclude>
+    <ClInclude Include="equipment.h">
+      <Filter>Header Files\propety</Filter>
+    </ClInclude>
+    <ClInclude Include="equipmentadmin.h">
+      <Filter>Header Files\propety</Filter>
+    </ClInclude>
+    <ClInclude Include="iteminventory.h">
+      <Filter>Header Files\text</Filter>
+    </ClInclude>
+    <ClInclude Include="equipbox.h">
+      <Filter>Header Files\text</Filter>
+    </ClInclude>
+    <ClInclude Include="dungeondata.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="dungeondataadmin.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="dungeondifficulty.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="floordata.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="road.h">
+      <Filter>Header Files\dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="putoff.h">
+      <Filter>Header Files\text</Filter>
+    </ClInclude>
+    <ClInclude Include="objectgenerator.h">
+      <Filter>Header Files\object</Filter>
+    </ClInclude>
+    <ClInclude Include="objectdataadmin.h">
+      <Filter>Header Files\database</Filter>
+    </ClInclude>
+    <ClInclude Include="stagefloorobjectpropety.h">
+      <Filter>Header Files\object</Filter>
+    </ClInclude>
+    <ClInclude Include="explain.h">
+      <Filter>Header Files\text</Filter>
+    </ClInclude>
+    <ClInclude Include="sounddataadmin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sounddata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
