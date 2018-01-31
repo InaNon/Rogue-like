@@ -20,7 +20,6 @@ public:
 	void Init(MapAdmin*, UnitAdmin*);
 
 	void MiniMapClear();
-	void MiniMapFullOpen();
 
 	void GraphLoad(std::string);
 

@@ -7,23 +7,10 @@ class Camera;
 
 class TrapData {
 protected:
+	TRAPTYPE traptype;
 	int graphichandle;
-public:
 
-	static const enum TRAPTYPE {
-		NEEDLE, //é¿ëï
-		WEAPON_WARP,//é¿ëïÅ@by ina
-		NO_MOVE,
-		BOMB, //é¿ëï
-		POISON,
-		HUNGER, //é¿ëï
-		HALLUC,
-		WARP, //é¿ëï
-		MANZI,
-		BUTTON,
-		SURPRISED,
-		TRAPTYPE_NUM,
-	} trap_type;
+public:
 
 	TrapData();
 	TrapData(const TrapData &rhs);
@@ -42,8 +29,6 @@ public:
 	void SetGraphicHandle(int);
 	void SetTrapType(TRAPTYPE);
 
-private:
-	TRAPTYPE trapType;
 };
 
 

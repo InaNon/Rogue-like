@@ -18,8 +18,12 @@ void MessageAdmin::Init(char* m_key, ModeManage* m_mode_manage) {
 
 void MessageAdmin::Draw() {
 
-	DrawFormatString(0, WINDOWSIZE_Y - 80, GetColor(255, 0, 0), "%s", active_text.c_str());
-
+	if (pop != push) {
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);		//ブレンドモードをα(128/255)に設定
+		DrawBoxAA(50, WINDOWSIZE_Y-100, WINDOWSIZE_X - 50, WINDOWSIZE_Y - 20, GetColor(0, 0, 0), true);
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);		//ブレンドモードをオフ
+		DrawFormatString(55, WINDOWSIZE_Y - 90, GetColor(255, 0, 0), "%s", active_text.c_str());
+	}
 }
 
 void MessageAdmin::Update() {

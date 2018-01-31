@@ -16,13 +16,13 @@ private:
 	double base_monsterhouse_rate;
 	int base_enemy_param;
 
-	int max_floorsize;
-	int max_room_num;
-	double max_road_rate;
-	int max_trap_amount;
-	int max_item_amount;
-	double max_monsterhouse_rate;
-	int max_enemy_param;
+	int half_floorsize;
+	int half_room_num;
+	double half_road_rate;
+	int half_trap_amount;
+	int half_item_amount;
+	double half_monsterhouse_rate;
+	int half_enemy_param;
 
 	int max_param;
 

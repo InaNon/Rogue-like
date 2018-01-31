@@ -7,7 +7,7 @@
 
 class AutoCellImage : public CellImage {
 protected:
-	int graphic_handle_auto[];
+	int graphic_handle_auto[AUTO_CELL_TYPE_NUM];
 public:
 	AutoCellImage();
 	~AutoCellImage();

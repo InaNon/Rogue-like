@@ -322,13 +322,13 @@ void UnitAdmin::Update() {
 }
 
 //ƒ}ƒbƒv‚Ì•Ç”»’è
-bool UnitAdmin::GetMovef(int x, int y) {
+bool UnitAdmin::GetMovef(int x, int y, COMMAND move_command) {
 
 	if (map_admin->GetMapCell(x, y) == NULL) {
 		return false;
 	}
 
-	return map_admin->GetMapCell(x,y)->GetMovef();
+	return map_admin->GetMovef_Conv(x,y, move_command);
 
 }
 

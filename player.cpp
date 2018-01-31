@@ -64,7 +64,7 @@ int Player::Update() {
 
 	if (direction_mode == false && key[KEY_INPUT_W] == 1 && key[KEY_INPUT_D] == 1) {
 		direction_flag = UP_RIGHT;
-		if (move_flag == NOTHING && unit_admin->GetMovef(map_x + 1, map_y - 1) == true && unit_admin->UnitExistMap(map_x + 1, map_y - 1) == NULL)
+		if (move_flag == NOTHING && unit_admin->GetMovef(map_x, map_y, direction_flag) == true && unit_admin->UnitExistMap(map_x + 1, map_y - 1) == NULL)
 		{
 			move_flag = UP_RIGHT;
 			stop = y - 32;
@@ -77,7 +77,7 @@ int Player::Update() {
 
 	if (direction_mode == false && key[KEY_INPUT_D] == 1 && key[KEY_INPUT_S] == 1) {
 		direction_flag = DOWN_RIGHT;
-		if (move_flag == NOTHING && unit_admin->GetMovef(map_x + 1, map_y + 1) == true && unit_admin->UnitExistMap(map_x + 1, map_y + 1) == NULL)
+		if (move_flag == NOTHING && unit_admin->GetMovef(map_x, map_y, direction_flag) == true && unit_admin->UnitExistMap(map_x + 1, map_y + 1) == NULL)
 		{
 			move_flag = DOWN_RIGHT;
 			stop = y + 32;
@@ -91,7 +91,7 @@ int Player::Update() {
 
 	if (direction_mode == false && key[KEY_INPUT_S] == 1 && key[KEY_INPUT_A] == 1) {
 		direction_flag = DOWN_LEFT;
-		if (move_flag == NOTHING && unit_admin->GetMovef(map_x - 1, map_y + 1) == true && unit_admin->UnitExistMap(map_x - 1, map_y + 1) == NULL)
+		if (move_flag == NOTHING && unit_admin->GetMovef(map_x, map_y, direction_flag) == true && unit_admin->UnitExistMap(map_x - 1, map_y + 1) == NULL)
 		{
 			move_flag = DOWN_LEFT;
 			stop = y + 32;
@@ -105,7 +105,7 @@ int Player::Update() {
 
 	if (direction_mode == false && key[KEY_INPUT_A] == 1 && key[KEY_INPUT_W] == 1) {
 		direction_flag = UP_LEFT;
-		if (move_flag == NOTHING && unit_admin->GetMovef(map_x - 1, map_y - 1) == true && unit_admin->UnitExistMap(map_x - 1, map_y - 1) == NULL)
+		if (move_flag == NOTHING && unit_admin->GetMovef(map_x, map_y, direction_flag) == true && unit_admin->UnitExistMap(map_x - 1, map_y - 1) == NULL)
 		{
 			move_flag = UP_LEFT;
 			stop = y - 32;
@@ -118,7 +118,7 @@ int Player::Update() {
 
 	if (direction_mode == false && key[KEY_INPUT_W] == 1) {
 		direction_flag = UP;
-		if (move_flag == NOTHING && unit_admin->GetMovef(map_x, map_y - 1) == true && unit_admin->UnitExistMap(map_x, map_y - 1) == NULL)
+		if (move_flag == NOTHING && unit_admin->GetMovef(map_x, map_y, direction_flag) == true && unit_admin->UnitExistMap(map_x, map_y - 1) == NULL)
 		{
 			move_flag = UP;
 			stop = y - 32;
@@ -131,7 +131,7 @@ int Player::Update() {
 
 	if (direction_mode == false && key[KEY_INPUT_S] == 1) {
 		direction_flag = DOWN;
-		if (move_flag == NOTHING && unit_admin->GetMovef(map_x, map_y + 1) == true && unit_admin->UnitExistMap(map_x, map_y + 1) == NULL)
+		if (move_flag == NOTHING && unit_admin->GetMovef(map_x, map_y, direction_flag) == true && unit_admin->UnitExistMap(map_x, map_y + 1) == NULL)
 		{
 			move_flag = DOWN;
 			stop = y + 32;
@@ -144,7 +144,7 @@ int Player::Update() {
 
 	if (direction_mode == false && key[KEY_INPUT_A] == 1) {
 		direction_flag = LEFT;
-		if (move_flag == NOTHING && unit_admin->GetMovef(map_x - 1, map_y) == true && unit_admin->UnitExistMap(map_x - 1, map_y) == NULL)
+		if (move_flag == NOTHING && unit_admin->GetMovef(map_x, map_y, direction_flag) == true && unit_admin->UnitExistMap(map_x - 1, map_y) == NULL)
 		{
 			move_flag = LEFT;
 			stop = x - 32;
@@ -157,7 +157,7 @@ int Player::Update() {
 
 	if (direction_mode == false && key[KEY_INPUT_D] == 1) {
 		direction_flag = RIGHT;
-		if (move_flag == NOTHING && unit_admin->GetMovef(map_x + 1, map_y) == true && unit_admin->UnitExistMap(map_x + 1, map_y) == NULL)
+		if (move_flag == NOTHING && unit_admin->GetMovef(map_x, map_y, direction_flag) == true && unit_admin->UnitExistMap(map_x + 1, map_y) == NULL)
 		{
 			move_flag = RIGHT;
 			stop = x + 32;

@@ -55,7 +55,6 @@ protected:
 	//アイテムの割合
 
 	double monsterhouse_rate;//モンスターハウス出現確率
-	static const int MONSTER_HOUSE_NUM = 2;
 
 
 public:
@@ -67,7 +66,7 @@ public:
 
 
 	/* ゲッター */
-	int GetMakeroomNum(int); //生成部屋数値 EVEN_DEVIDEのときのみ、0×1のセクションに分ける
+	int GetMakeroomNum(int); //生成部屋数値
 	double GetMakeroadRate(); //生成道割合
 
 	int GetFloorsizeX();
@@ -95,7 +94,6 @@ public:
 	double GetShopRate(); //店生成率
 
 	double GetMonsterhouseRate();
-	int GetMonsterhouseNum();
 
 	/* セッター */
 	void SetMakeroomNum(int); //生成部屋数値

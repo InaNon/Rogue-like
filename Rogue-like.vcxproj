@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A841ACA1-E554-4E97-8187-697F77917036}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Roguelike</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="artificialintelligence.cpp" />
+    <ClCompile Include="autocellimage.cpp" />
+    <ClCompile Include="camera.cpp" />
+    <ClCompile Include="cell.cpp" />
+    <ClCompile Include="celldata.cpp" />
+    <ClCompile Include="celldataadmin.cpp" />
+    <ClCompile Include="cellimage.cpp" />
+    <ClCompile Include="drawdungeon.cpp" />
+    <ClCompile Include="dungeondata.cpp" />
+    <ClCompile Include="dungeondataadmin.cpp" />
+    <ClCompile Include="dungeondifficulty.cpp" />
+    <ClCompile Include="equipbox.cpp" />
+    <ClCompile Include="equipitemdata.cpp" />
+    <ClCompile Include="equipment.cpp" />
+    <ClCompile Include="explain.cpp" />
+    <ClCompile Include="floordata.cpp" />
+    <ClCompile Include="graphic.cpp" />
+    <ClCompile Include="itemdeal.cpp" />
+    <ClCompile Include="iteminventory.cpp" />
+    <ClCompile Include="itemstock.cpp" />
+    <ClCompile Include="itemstockadmin.cpp" />
+    <ClCompile Include="itemadmin.cpp" />
+    <ClCompile Include="itemdata.cpp" />
+    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="objectdataadmin.cpp" />
+    <ClCompile Include="i_main.cpp" />
+    <ClCompile Include="listbox.cpp" />
+    <ClCompile Include="loaddatabase.cpp" />
+    <ClCompile Include="makedungeon.cpp" />
+    <ClCompile Include="makemapgraphic.cpp" />
+    <ClCompile Include="map.cpp" />
+    <ClCompile Include="mapadmin.cpp" />
+    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="minimap.cpp" />
+    <ClCompile Include="modemanage.cpp" />
+    <ClCompile Include="object.cpp" />
+    <ClCompile Include="objectdata.cpp" />
+    <ClCompile Include="objectgenerator.cpp" />
+    <ClCompile Include="road.cpp" />
+    <ClCompile Include="room.cpp" />
+    <ClCompile Include="section.cpp" />
+    <ClCompile Include="sectionadmin.cpp" />
+    <ClCompile Include="selectbox.cpp" />
+    <ClCompile Include="selectboxadmin.cpp" />
+    <ClCompile Include="message.cpp" />
+    <ClCompile Include="messageadmin.cpp" />
+    <ClCompile Include="player.cpp" />
+    <ClCompile Include="item.cpp" />
+    <ClCompile Include="equipmentadmin.cpp" />
+    <ClCompile Include="putoff.cpp" />
+    <ClCompile Include="sounddata.cpp" />
+    <ClCompile Include="sounddataadmin.cpp" />
+    <ClCompile Include="stagefloorobjectpropety.cpp" />
+    <ClCompile Include="useitem.cpp" />
+    <ClCompile Include="status.cpp" />
+    <ClCompile Include="statusitemdata.cpp" />
+    <ClCompile Include="trapdata.cpp" />
+    <ClCompile Include="trapdataadmin.cpp" />
+    <ClCompile Include="unit.cpp" />
+    <ClCompile Include="unitadmin.cpp" />
+    <ClCompile Include="unitdata.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="artificialintelligence.h" />
+    <ClInclude Include="autocellimage.h" />
+    <ClInclude Include="camera.h" />
+    <ClInclude Include="cell.h" />
+    <ClInclude Include="celldata.h" />
+    <ClInclude Include="celldataadmin.h" />
+    <ClInclude Include="cellimage.h" />
+    <ClInclude Include="drawdungeon.h" />
+    <ClInclude Include="dungeondata.h" />
+    <ClInclude Include="dungeondataadmin.h" />
+    <ClInclude Include="dungeondifficulty.h" />
+    <ClInclude Include="equipbox.h" />
+    <ClInclude Include="equipitemdata.h" />
+    <ClInclude Include="equipment.h" />
+    <ClInclude Include="equipmentadmin.h" />
+    <ClInclude Include="explain.h" />
+    <ClInclude Include="floordata.h" />
+    <ClInclude Include="graphic.h" />
+    <ClInclude Include="itemdeal.h" />
+    <ClInclude Include="iteminventory.h" />
+    <ClInclude Include="itemstock.h" />
+    <ClInclude Include="itemstockadmin.h" />
+    <ClInclude Include="itemadmin.h" />
+    <ClInclude Include="item.h" />
+    <ClInclude Include="itemdata.h" />
+    <ClInclude Include="define.h" />
+    <ClInclude Include="enemy.h" />
+    <ClInclude Include="objectdataadmin.h" />
+    <ClInclude Include="listbox.h" />
+    <ClInclude Include="loaddatabase.h" />
+    <ClInclude Include="makedungeon.h" />
+    <ClInclude Include="makemapgraphic.h" />
+    <ClInclude Include="map.h" />
+    <ClInclude Include="mapadmin.h" />
+    <ClInclude Include="menu.h" />
+    <ClInclude Include="minimap.h" />
+    <ClInclude Include="modemanage.h" />
+    <ClInclude Include="object.h" />
+    <ClInclude Include="objectdata.h" />
+    <ClInclude Include="objectgenerator.h" />
+    <ClInclude Include="putoff.h" />
+    <ClInclude Include="road.h" />
+    <ClInclude Include="room.h" />
+    <ClInclude Include="section.h" />
+    <ClInclude Include="sectionadmin.h" />
+    <ClInclude Include="selectbox.h" />
+    <ClInclude Include="selectboxadmin.h" />
+    <ClInclude Include="message.h" />
+    <ClInclude Include="messageadmin.h" />
+    <ClInclude Include="player.h" />
+    <ClInclude Include="sounddata.h" />
+    <ClInclude Include="sounddataadmin.h" />
+    <ClInclude Include="stagefloorobjectpropety.h" />
+    <ClInclude Include="status.h" />
+    <ClInclude Include="statusitemdata.h" />
+    <ClInclude Include="trapdata.h" />
+    <ClInclude Include="trapdataadmin.h" />
+    <ClInclude Include="unit.h" />
+    <ClInclude Include="unitadmin.h" />
+    <ClInclude Include="unitdata.h" />
+    <ClInclude Include="useitem.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
