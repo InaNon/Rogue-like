@@ -1,0 +1,125 @@
+﻿  unitdata.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  unitadmin.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  unit.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  trapdataadmin.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  trapdata.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  statusitemdata.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  status.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  useitem.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  stagefloorobjectpropety.cpp
+  sounddataadmin.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  sounddata.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  putoff.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  equipmentadmin.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  item.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  player.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  messageadmin.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  message.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  selectboxadmin.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  selectbox.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  sectionadmin.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  コードを生成中...
+  コンパイル中...
+  section.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  room.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  road.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  objectgenerator.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  objectdata.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  object.cpp
+  modemanage.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  minimap.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  menu.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  mapadmin.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  map.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  makemapgraphic.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  makedungeon.cpp
+  loaddatabase.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  listbox.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  i_main.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  objectdataadmin.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  enemy.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  itemdata.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  itemadmin.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  コードを生成中...
+  コンパイル中...
+  itemstockadmin.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  itemstock.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  iteminventory.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  itemdeal.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  graphic.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  floordata.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  explain.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  equipment.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  equipitemdata.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  equipbox.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  dungeondifficulty.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  dungeondataadmin.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  dungeondata.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  drawdungeon.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  cellimage.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  celldataadmin.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  celldata.cpp
+  cell.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  camera.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  autocellimage.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  コードを生成中...
+  コンパイル中...
+  artificialintelligence.cpp
+c:\dxlib_vc\プロジェクトに追加すべきファイル_vc用\dxdatatypewin.h(24): fatal error C1083: include ファイルを開けません。'commctrl.h':No such file or directory
+  コードを生成中...
