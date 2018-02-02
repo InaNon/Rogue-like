@@ -177,9 +177,6 @@
     <ClInclude Include="selectboxadmin.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="shop.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="simpletileimage.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -220,6 +217,15 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="useitem.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="sounddata.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="sounddataadmin.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="shop.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -317,9 +323,6 @@
     <ClCompile Include="loaddatabase.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="maketilegraphic.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -383,9 +386,6 @@
     <ClCompile Include="selectboxadmin.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="shop.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="simpletileimage.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -426,6 +426,18 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="useitem.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="new_i_main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="sounddata.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="sounddataadmin.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="shop.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

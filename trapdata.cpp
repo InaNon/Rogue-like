@@ -10,7 +10,7 @@ TrapData::~TrapData() {
 }
 
 void TrapData::TrapDataInit(TRAPTYPE m_traptype) {
-	traptype = m_traptype;
+	trapType = m_traptype;
 }
 
 void TrapData::Draw(Camera* m_camera,int m_cx,int m_cy) {
@@ -33,9 +33,9 @@ void TrapData::LoadFile(std::string m_filename, int m_x, int m_y) {
 
 
 /*ゲッター*/
-TRAPTYPE TrapData::GetTrapType() { return traptype; }
+TrapData::TRAPTYPE TrapData::GetTrapType() { return trapType; }
 int TrapData::GetGraphicHandle() { return graphichandle; }
 
 /*セッター*/
 void TrapData::SetGraphicHandle(int m_graphichandle) { graphichandle = m_graphichandle; }
-void TrapData::SetTrapType(TRAPTYPE m_traptype) { traptype = m_traptype; }
+void TrapData::SetTrapType(TRAPTYPE m_traptype) { trapType = m_traptype; }

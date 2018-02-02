@@ -7,6 +7,7 @@ void ModeManage::Init() {
 	message_mode = false;
 	select_mode = false;
 	advance_dungeon_mode = false;
+	shop_mode = false;
 }
 bool ModeManage::GetUnitMode() {return unit_mode;}
 void ModeManage::SetUnitMode(bool m_unit_mode) {unit_mode = m_unit_mode;}
@@ -18,6 +19,8 @@ bool ModeManage::GetSelectMode() { return select_mode; }
 void ModeManage::SetSelectMode(bool m_select_mode) { select_mode = m_select_mode; }
 bool ModeManage::GetAdvanceDungeonMode() { return advance_dungeon_mode; }
 void ModeManage::SetAdvanceDungeonMode(bool _advance_dungeon_mode) { advance_dungeon_mode = _advance_dungeon_mode; }
+bool ModeManage::GetShopMode() { return shop_mode; }
+void ModeManage::SetShopMode(bool _shop_mode) { shop_mode = _shop_mode; }
 
 ModeManage::ModeManage(){}
 ModeManage::~ModeManage(){}

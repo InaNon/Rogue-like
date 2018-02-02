@@ -11,47 +11,18 @@
 #include "floordata.h"
 #include "dungeondata.h"
 #include "math.h"
+#include "mymethod.h"
+
+#include "minimap.h"
 
 static const int DEBUG_SA = false;
 
-std::vector<int> RandomSwap(int m_min, int m_max) {
-	std::vector<int> buf(m_max - m_min + 1, NULL);
-	int rand, t;
-
-	for (int i = 0; i < (signed int)buf.size(); i++) {
-		buf[i] = i + m_min;
-	}
-
-	for (int i = 0; i < (signed int)buf.size() - 1; i++) {
-		rand = GetRand(buf.size() - 1 - i - 1) + i;
-
-		t = buf[rand];
-		buf[rand] = buf[i];
-		buf[i] = t;
-	}
-
-	/*
-	printfDx("RandomSwap");
-	for (int i = 0; i < (signed int)buf.size(); i++) {
-		printfDx("%d", buf[i]);
-	}
-	WaitKey();
-	*/
-
-
-	return buf;
-}
-
-/*メモ*/
 /*
-ダンジョン生成において設定できるパラメータ
-
-//Section割のアルゴリズムの選択<DUNGEON_MAKE_MODE>
-DEPTH_FIRST_RAND　深さ優先形式。初めに大きな部屋が作られやすい。数値
-DEPTH_FIRST_LARGER　深さ優先形式で、分割時もより大きい部屋が作られやすい
-WIDTH_FIRST　幅優先形式で、
+やること決まってない
+店？
 
 */
+
 
 
 SectionAdmin::SectionAdmin(MapAdmin* m_map_admin, CellDataAdmin* m_celldata_admin, TrapDataAdmin* m_trapdata_admin) {
@@ -108,6 +79,9 @@ void SectionAdmin::DungeonMake() {
 	//最も最初のSectionの作成と、それに連なる全てのSectionの作成
 	//grand_section->MakeSection(make_mode,5 , (all_map_x - map_x) / 2, (all_map_y - map_y) / 2, map_x, map_y, grand_section);
 
+
+
+	
 
 	//部屋を生成する
 	//grand_section->MakeRoom();
@@ -172,6 +146,8 @@ void SectionAdmin::DungeonMake() {
 	//std::vector<Section*[2]> section_combination;
 	//Section* buf_section_combination[2];
 
+	bool room_one_f = true;
+
 	std::vector<std::vector<int>> section_combination;
 	std::vector<int> buf_section_combination(2, -1);
 	for (int i = 0; i < section_amount; i++) {
@@ -184,180 +160,178 @@ void SectionAdmin::DungeonMake() {
 						//buf_section_combination[0] = sections[i];
 						//buf_section_combination[1] = sections[j];
 						section_combination.push_back(buf_section_combination);
+						room_one_f = false;
 					}
 				}
 			}
 		}
 	}
 
-	double max_roads = (signed int)section_combination.size();
+	if (room_one_f == false) {
 
-	//セクション組(道候補)を何本か消す処理
-	std::vector<std::vector<int>> deleted_section_combination;
-	deleted_section_combination = DeleteSectionCombination(section_combination, (int)(max_roads*(1.0 - floordata->GetMakeroadRate())), exist_f);
-	//deleted_section_combination = section_combination;
+		double max_roads = (signed int)section_combination.size();
 
-	if (DEBUG_SA) {
-		printfDx("DeleteSectionCombination end\n");
-		WaitKey();
-	}
+		//セクション組(道候補)を何本か消す処理
+		std::vector<std::vector<int>> deleted_section_combination;
+		deleted_section_combination = DeleteSectionCombination(section_combination, (int)(max_roads*(1.0 - floordata->GetMakeroadRate())), exist_f);
+		//deleted_section_combination = section_combination;
 
 	//道を生成する処理
-	for (int i = 0; i < (signed int)size(deleted_section_combination); i++) {
-		//printfDx("%d,%d\n", section_combination[i][0], section_combination[i][1]);
-		MakeRoadSectionToSection(sections[deleted_section_combination[i][0]], sections[deleted_section_combination[i][1]]);
-	}
-	//WaitKey();
+		for (int i = 0; i < (signed int)size(deleted_section_combination); i++) {
+			//printfDx("%d,%d\n", section_combination[i][0], section_combination[i][1]);
+			MakeRoadSectionToSection(sections[deleted_section_combination[i][0]], sections[deleted_section_combination[i][1]]);
+		}
+		//WaitKey();
 
-	/*
-	std::vector<Room*> buf_cr;
-	printfDx("---------\n");
-	for (int i = 0; i < section_amount; i++) {
-		printfDx("%d:", i);
-		if (sections[i]->GetRoomf()) {
-			buf_cr = sections[i]->GetRoom()->GetConnectionRoom();
-			for (int j = 0; j < (signed int)sections[i]->GetRoom()->GetConnectionRoom().size(); j++) {
-				printfDx("%d", buf_cr[j]->GetPSection()->GetNumber());
+		/*
+		std::vector<Room*> buf_cr;
+		printfDx("---------\n");
+		for (int i = 0; i < section_amount; i++) {
+			printfDx("%d:", i);
+			if (sections[i]->GetRoomf()) {
+				buf_cr = sections[i]->GetRoom()->GetConnectionRoom();
+				for (int j = 0; j < (signed int)sections[i]->GetRoom()->GetConnectionRoom().size(); j++) {
+					printfDx("%d", buf_cr[j]->GetPSection()->GetNumber());
+				}
 			}
+			else {
+				printfDx("NULL");
+			}
+			printfDx("\n");
 		}
-		else {
-			printfDx("NULL");
-		}
-		printfDx("\n");
-	}
-	printfDx("---------\n");
-	*/
+		printfDx("---------\n");
+		*/
 
-	if (DEBUG_SA) {
-		printfDx("MakeRoadSectionToSection end\n");
-		WaitKey();
-	}
 
-	//部屋と部屋の接続の失敗などが原因で、部屋と部屋が繋がって居ない部屋群がある場合は、別途、ランダムに隣接するランダムなセクションと
-	//接続を行う。
-	//これを繰り返す。
+		//部屋と部屋の接続の失敗などが原因で、部屋と部屋が繋がって居ない部屋群がある場合は、別途、ランダムに隣接するランダムなセクションと
+		//接続を行う。
+		//これを繰り返す。
 
-	/*
-	for (int i = 0; i < section_amount; i++) {
-		if (sections[i]->GetRoomf()) {
-			if (!sections[i]->GetRoom()->GetConnectionf()) {
-				//接続を行う
-				for (int j = 0; j < section_amount;j++) {
-					if (i != j) {
-						if (MakeRoadSectionToSection(sections[i], sections[j])) {
-							//printfDx("t");
-							break;
+
+
+		/*
+		for (int i = 0; i < section_amount; i++) {
+			if (sections[i]->GetRoomf()) {
+				if (!sections[i]->GetRoom()->GetConnectionf()) {
+					//接続を行う
+					for (int j = 0; j < section_amount;j++) {
+						if (i != j) {
+							if (MakeRoadSectionToSection(sections[i], sections[j])) {
+								//printfDx("t");
+								break;
+							}
 						}
 					}
 				}
 			}
 		}
-	}
-	//これだと解決しない。部屋群が孤立している場合対処できないので、最初に道を消す処理で使った検索方法を用いて判定が必要
-	*/
+		//これだと解決しない。部屋群が孤立している場合対処できないので、最初に道を消す処理で使った検索方法を用いて判定が必要
+		*/
 
-	//繋がっていない部屋群を接続して、独立した部屋群をなくす処理
-	std::vector<int> buf_group;
-	std::vector<int> rs = RandomSwap(0, (signed int)section_combination.size() - 1);
-	int group_num_max = 0, i = 0, sectosecf;
-	bool b_f = false;
+		//繋がっていない部屋群を接続して、独立した部屋群をなくす処理
+		std::vector<int> buf_group;
+		std::vector<int> rs = MyMethod::RandomSwap(0, (signed int)section_combination.size() - 1);
+		int group_num_max = 0, i = 0, sectosecf;
+		bool b_f = false;
 
-	
-	/*
-	for (int i = 0; i < (signed int)section_combination.size(); i++) {
-		printfDx("[%d,%d]", section_combination[i][0], section_combination[i][1]);
-	}
-	printfDx("\nrs=%d\n",(signed int)rs.size());
-	for (int i = 0; i < (signed int)rs.size(); i++) {
-		printfDx("%d ",rs[i]);
-	}
-	printfDx("\n\n");
-	*/
+		/*
+		for (int i = 0; i < (signed int)section_combination.size(); i++) {
+			printfDx("[%d,%d]", section_combination[i][0], section_combination[i][1]);
+		}
+		printfDx("\nrs=%d\n",(signed int)rs.size());
+		for (int i = 0; i < (signed int)rs.size(); i++) {
+			printfDx("%d ",rs[i]);
+		}
+		printfDx("\n\n");
+		*/
 
-	while (1) {
-		b_f = true;
-		//printfDx("%d %d %d\n", i,group_num_max, rs.size());
-		//WaitKey();
+		while (1) {
+			b_f = true;
+			//printfDx("%d %d %d\n", i,group_num_max, rs.size());
+			//WaitKey();
 
-		//"実際に"接続されているセクション組を格納する
-		std::vector<std::vector<int>> room_combination;
-		std::vector<int> buf_room_combination(2, -1);
-		std::vector<Room*> buf_connection_room;
-		for (int k = 0; k < section_amount; k++) {
-			if (sections[k]->GetRoomf()) {
-				buf_connection_room = sections[k]->GetRoom()->GetConnectionRoom();
-				for (int j = 0; j < (signed int)buf_connection_room.size(); j++) {
-					if (buf_connection_room[j] != sections[k]->GetRoom()) {
-						buf_room_combination[0] = k;
-						buf_room_combination[1] = buf_connection_room[j]->GetPSection()->GetNumber();
-						room_combination.push_back(buf_room_combination);
+			//"実際に"接続されているセクション組を格納する
+			std::vector<std::vector<int>> room_combination;
+			std::vector<int> buf_room_combination(2, -1);
+			std::vector<Room*> buf_connection_room;
+			for (int k = 0; k < section_amount; k++) {
+				if (sections[k]->GetRoomf()) {
+					buf_connection_room = sections[k]->GetRoom()->GetConnectionRoom();
+					for (int j = 0; j < (signed int)buf_connection_room.size(); j++) {
+						if (buf_connection_room[j] != sections[k]->GetRoom()) {
+							buf_room_combination[0] = k;
+							buf_room_combination[1] = buf_connection_room[j]->GetPSection()->GetNumber();
+							room_combination.push_back(buf_room_combination);
+						}
 					}
 				}
 			}
-		}
 
-		//実際に接続されているセクション組のグループ番号をbuf_groupに格納する
-		buf_group = GetConnectGroup(room_combination, (signed int)sections.size(), exist_f);
-		
-		int new_group_num_max = 0;
-		for (int j = 0; j < (signed int)buf_group.size(); j++) {
-			if (new_group_num_max < buf_group[j]) {
-				new_group_num_max = buf_group[j];
-			}
-		}
+			//実際に接続されているセクション組のグループ番号をbuf_groupに格納する
+			buf_group = GetConnectGroup(room_combination, (signed int)sections.size(), exist_f);
 
-		if (group_num_max != new_group_num_max) {
-			i = 0;
-		}
-		group_num_max = new_group_num_max;
-
-
-		//もしグループが二つ以上存在する場合は、各グループ間で接続を行う。
-		if (group_num_max > 1) {
-			while (i < (signed int)rs.size()) {
-				//printfDx("'%d'",i);
-				/*
-				if (buf_group[section_combination[rs[i]][0]] == group_num_max && buf_group[section_combination[rs[i]][1]] != 0 && buf_group[section_combination[rs[i]][1]] != group_num_max) {
-					if (MakeRoadSectionToSection(sections[section_combination[rs[i]][0]], sections[section_combination[rs[i]][1]])) {
-						i++;
-						break;
-					}
-				}
-				if (buf_group[section_combination[rs[i]][1]] == group_num_max && buf_group[section_combination[rs[i]][0]] != 0 && buf_group[section_combination[rs[i]][0]] != group_num_max) {
-					if (MakeRoadSectionToSection(sections[section_combination[rs[i]][1]], sections[section_combination[rs[i]][0]])) {
-						i++;
-						break;
-					}
-				}*/
-				//printfDx("g<%d %d> ",buf_group[section_combination[rs[i]][0]], buf_group[section_combination[rs[i]][1]]);
-
-				if (buf_group[section_combination[rs[i]][0]] != buf_group[section_combination[rs[i]][1]]) {
-					sectosecf = MakeRoadSectionToSection(sections[section_combination[rs[i]][0]], sections[section_combination[rs[i]][1]]);
-					if (sectosecf > 0) {
-						i++;
-						b_f = false;
-						break;
-					}
-				}
-			
-				i++;
-				if (i == (signed int)rs.size()) {
-					printfDx("Cannot solve separated room problem\n");
-					printfDx("%d %d\n",group_num_max, rs.size());
-					//WaitKey();
-					break;
+			int new_group_num_max = 0;
+			for (int j = 0; j < (signed int)buf_group.size(); j++) {
+				if (new_group_num_max < buf_group[j]) {
+					new_group_num_max = buf_group[j];
 				}
 			}
 
-		}
-		else {
-			break;
+			if (group_num_max != new_group_num_max) {
+				i = 0;
+			}
+			group_num_max = new_group_num_max;
+
+
+			//もしグループが二つ以上存在する場合は、各グループ間で接続を行う。
+			if (group_num_max > 1) {
+				while (i < (signed int)rs.size()) {
+					//printfDx("'%d'",i);
+					/*
+					if (buf_group[section_combination[rs[i]][0]] == group_num_max && buf_group[section_combination[rs[i]][1]] != 0 && buf_group[section_combination[rs[i]][1]] != group_num_max) {
+						if (MakeRoadSectionToSection(sections[section_combination[rs[i]][0]], sections[section_combination[rs[i]][1]])) {
+							i++;
+							break;
+						}
+					}
+					if (buf_group[section_combination[rs[i]][1]] == group_num_max && buf_group[section_combination[rs[i]][0]] != 0 && buf_group[section_combination[rs[i]][0]] != group_num_max) {
+						if (MakeRoadSectionToSection(sections[section_combination[rs[i]][1]], sections[section_combination[rs[i]][0]])) {
+							i++;
+							break;
+						}
+					}*/
+					//printfDx("g<%d %d> ",buf_group[section_combination[rs[i]][0]], buf_group[section_combination[rs[i]][1]]);
+
+					if (buf_group[section_combination[rs[i]][0]] != buf_group[section_combination[rs[i]][1]]) {
+						sectosecf = MakeRoadSectionToSection(sections[section_combination[rs[i]][0]], sections[section_combination[rs[i]][1]]);
+						if (sectosecf > 0) {
+							i++;
+							b_f = false;
+							break;
+						}
+					}
+
+					i++;
+					if (i == (signed int)rs.size()) {
+						printfDx("Cannot solve separated room problem\n");
+						printfDx("%d %d\n", group_num_max, rs.size());
+						//WaitKey();
+						break;
+					}
+				}
+
+			}
+			else {
+				break;
+			}
+
+			if (i >= (signed int)rs.size() && b_f) {
+				break;
+			}
 		}
 
-		if (i >= (signed int)rs.size() && b_f) {
-			break;
-		}
 	}
+
 
 	//printfDx("%d", group_num_max);
 
@@ -383,46 +357,24 @@ void SectionAdmin::DungeonMake() {
 		SetTempToCellDataAll(BOX_WALL, false, false);
 	}
 	
-
+	
 
 	Room* shop_room = MakeShop(floordata->GetShopRate());
 
-
-	//削っても問題ない場所をマーキングする。
+	//削っても問題ない場所を壁にする。
 	std::vector<std::vector<SHAVE_F>> buf_shavef;
 	for (int k = 0; k < section_amount; k++) {
 		if (sections[k]->GetRoomf() && shop_room != sections[k]->GetRoom()) {
-
 			buf_shavef = RoomShaveMarking(sections[k]->GetRoom());
-			
-			ShaveEdge(sections[k]->GetRoom(), floordata->GetShaveRate(), buf_shavef, SHAVE_ALL_TRUE);
-
-			/*
-			for (int i = 0; i < sections[k]->GetRoom()->GetSizeX(); i++) {
-				for (int j = 0; j < sections[k]->GetRoom()->GetSizeY(); j++) {
-					if (buf_shavef[i][j] == SHAVE_SLANT_TRUE) {
-						//map->GetCell(sections[k]->GetRoom()->GetX() + i, sections[k]->GetRoom()->GetY() + j)->SetCellData(celldata_admin->GetCellData(SLANT_WALL));
-					}
-					if (buf_shavef[i][j] == SHAVE_ALL_TRUE) {
-						//map->GetCell(sections[k]->GetRoom()->GetX() + i, sections[k]->GetRoom()->GetY() + j)->SetCellData(celldata_admin->GetCellData(BOX_WALL));
-
-					}
-				}
+			if (floordata->GetWallSlant_f()) {
+				ShaveEdge(sections[k]->GetRoom(), floordata->GetShaveRate(), buf_shavef, SHAVE_ALL_TRUE, SLANT_WALL);
 			}
-			*/
+			else {
+				ShaveEdge(sections[k]->GetRoom(), floordata->GetShaveRate(), buf_shavef, SHAVE_ALL_TRUE, BOX_WALL);
+			}
 		}
 	}
-
-	//実際に削る処理
-
-	//部屋の角を削る処理　封印中
-	/*
-	for (int i = 0; i < section_amount; i++) {
-	if (sections[i]->GetRoomf()) {
-	ShaveEdge(sections[i]->GetRoom(), 3.0);
-	}
-	}
-	*/
+	
 
 	for (int i = 0; i < section_amount; i++) {
 		if (sections[i]->GetRoomf()) {
@@ -431,21 +383,52 @@ void SectionAdmin::DungeonMake() {
 	}
 
 	//特殊タイルの設置
-	MakeTrap(30); //罠レートを作ってねえ
-
-
-
-
-
+	MakeTrap(floordata->GetTrapNum());
 
 	MakeStep(); //階段消滅の恐れがあるため、最後に設置
-
 	
 	//残りのマスを設定していない場所すべて(主にダンジョン外に)壁を設置
-	SetTempToCellDataAll(BOX_WALL, false, false);
-
+	if (floordata->GetWallSlant_f()) {
+		SetTempToCellDataAll(SLANT_WALL, false, false);
+	}
+	else {
+		SetTempToCellDataAll(BOX_WALL, false, false);
+	}
 
 	return;
+}
+
+
+void SectionAdmin::MakeMonsterhouse() {
+	double mh_rate = floordata->GetMonsterhouseRate();
+	int room_i = 0;
+	std::vector<Room*> swed_rooms = GetSwapedRoom();
+	int size = swed_rooms.size();
+
+	for (int i = 0; i < floordata->GetMonsterhouseNum(); i++) {
+		if (MyMethod::Lottery(mh_rate)) {
+			swed_rooms[room_i]->SetIsMonsterhouse(true);
+			room_i++;
+		}
+	}
+
+	/*
+	while ((mh_rate > 0.0) && (room_i < (signed int)swed_rooms.size()-1)) {
+		if (mh_rate >= 1.0) {
+			swed_rooms[room_i]->SetIsMonsterhouse(true);
+			room_i++;
+		}
+		else {
+			if (mh_rate < 1.0) {
+				if (MyMethod::Lottery(mh_rate)) {
+					swed_rooms[room_i]->SetIsMonsterhouse(true);
+				}
+				room_i++;
+			}
+		}
+		mh_rate--;//ifの外に出さないと無限ループする
+	}
+	*/
 }
 
 void SectionAdmin::MakeHole(Room* m_Room) {
@@ -465,14 +448,18 @@ void SectionAdmin::MakeHole(Room* m_Room) {
 	
 }
 
-
-void SectionAdmin::ShaveEdge(Room* m_Room, double m_shave_rate, std::vector<std::vector<SHAVE_F>> m_shavefvec,SHAVE_F m_shavef) {
+void SectionAdmin::ShaveEdge(Room* m_Room, double m_shave_rate, std::vector<std::vector<SHAVE_F>> m_shavefvec, SHAVE_F m_shavef, CELLTYPE m_cell_type) {
+	//m_Room : 削る大正の部屋
+	//m_shave_rate : 削り率
+	//m_shavefvec : 削れる位置がtrueの二次元配列
+	//m_shavef : 削りモード
 
 	int mx = m_Room->GetX();
 	int my = m_Room->GetY();
 	int sizex = m_Room->GetSizeX();
 	int sizey = m_Room->GetSizeY();
 
+	//部屋に対して、
 	std::vector<std::vector<bool>> shave_bool(sizex, std::vector<bool>(sizey, false));
 
 
@@ -480,8 +467,8 @@ void SectionAdmin::ShaveEdge(Room* m_Room, double m_shave_rate, std::vector<std:
 	int shave_count2 = 0;
 	int shave_amount = int(double(sizex*sizey)*m_shave_rate);
 	int rnd;
-	int cnt;
 	int bufx, bufy;
+	bool shave_f;
 
 	bool breakf = false;
 
@@ -495,6 +482,10 @@ void SectionAdmin::ShaveEdge(Room* m_Room, double m_shave_rate, std::vector<std:
 				if (i < sizex - 1) { if ( map->GetCell(mx + i + 1, my + j)->GetMovef() == false) { shave_bool[i][j] = true; } }
 				if (j < sizey - 1) { if ( map->GetCell(mx + i, my + j + 1)->GetMovef() == false) { shave_bool[i][j] = true; } }
 				*/
+
+				//そのマスの上下左右を見て、移動不可能なマスならば、そこを削ることができるマスであるとする
+
+				/*
 				cnt = 0;
 				if (i == 0) { cnt++; }
 				if (j == 0) { cnt++; }
@@ -506,11 +497,31 @@ void SectionAdmin::ShaveEdge(Room* m_Room, double m_shave_rate, std::vector<std:
 				if (j < sizey - 1) { if (map->GetCell(mx + i, my + j + 1)->GetMovef() == false) { cnt++; } }
 				
 				if (cnt > 1) { shave_bool[i][j] = true; }
+				*/
 				/*
 				角削り方式に変更する
 				*/
 
+				//単に二つ以上が壁であるときに削ることが出来るというのだと、通路上のやつが削られて孤立が出来る
+
+				shave_f = false;
+				if (!(map->GetMovef(mx + i - 1, my + j)) && !(map->GetMovef(mx + i, my + j - 1))) {
+					shave_f = true;
+				}
+				if (!(map->GetMovef(mx + i + 1, my + j)) && !(map->GetMovef(mx + i, my + j - 1))) {
+					shave_f = true;
+				}
+				if (!(map->GetMovef(mx + i - 1, my + j)) && !(map->GetMovef(mx + i, my + j + 1))) {
+					shave_f = true;
+				}
+				if (!(map->GetMovef(mx + i + 1, my + j)) && !(map->GetMovef(mx + i, my + j + 1))) {
+					shave_f = true;
+				}
+				if (shave_f) {
+					shave_bool[i][j] = true;
+				}
 			}
+			//削る数をカウントしておく。
 			if (shave_bool[i][j]) {
 				shave_count++;
 			}
@@ -528,7 +539,10 @@ void SectionAdmin::ShaveEdge(Room* m_Room, double m_shave_rate, std::vector<std:
 				if (shave_bool[i][j]) {
 					if (shave_count2 == rnd) {
 						//壁にする
-						map->GetCell(mx + i, my + j)->SetCellData(celldata_admin->GetCellData(BOX_WALL));
+						map->GetCell(mx + i, my + j)->SetCellData(celldata_admin->GetCellData(m_cell_type));
+
+						//minimap->Draw();
+						//WaitKey();
 
 						//shave_boolを相対的に更新する
 						shave_bool[i][j] = false;
@@ -541,6 +555,7 @@ void SectionAdmin::ShaveEdge(Room* m_Room, double m_shave_rate, std::vector<std:
 						if (j < sizey - 1) { if (m_shavefvec[i][j + 1] == m_shavef && map->GetCell(mx + i, my + j + 1)->GetMovef() == true && shave_bool[i][j + 1] == false) { shave_bool[i][j + 1] = true; shave_count++; } }
 						*/
 
+						//削ったことによって新たに発生する、削ることのできる位置を定める
 						for (int l = 0; l < 4; l++) {
 							if (l == 0) {
 								if (i > 0) { bufx = i - 1; bufy = j; } else { continue; }
@@ -555,17 +570,21 @@ void SectionAdmin::ShaveEdge(Room* m_Room, double m_shave_rate, std::vector<std:
 								if (j < sizey - 1) { bufx = i; bufy = j + 1; } else { continue; }
 							}
 
-							cnt = 0;
-							if (bufx == 0) { cnt++; }
-							if (bufy == 0) { cnt++; }
-							if (bufx == sizex - 1) { cnt++; }
-							if (bufy == sizey - 1) { cnt++; }
-							if (bufx > 0) { if (map->GetCell(mx + bufx - 1, my + bufy)->GetMovef() == false) { cnt++; } }
-							if (bufy > 0) { if (map->GetCell(mx + bufx, my + bufy - 1)->GetMovef() == false) { cnt++; } }
-							if (bufx < sizex - 1) { if (map->GetCell(mx + bufx + 1, my + bufy)->GetMovef() == false) { cnt++; } }
-							if (bufy < sizey - 1) { if (map->GetCell(mx + bufx, my + bufy + 1)->GetMovef() == false) { cnt++; } }
+							shave_f = false;
+							if (!(map->GetMovef(mx + bufx - 1, my + bufy)) && !(map->GetMovef(mx + bufx, my + bufy - 1))) {
+								shave_f = true;
+							}
+							if (!(map->GetMovef(mx + bufx + 1, my + bufy)) && !(map->GetMovef(mx + bufx, my + bufy - 1))) {
+								shave_f = true;
+							}
+							if (!(map->GetMovef(mx + bufx - 1, my + bufy)) && !(map->GetMovef(mx + bufx, my + bufy + 1))) {
+								shave_f = true;
+							}
+							if (!(map->GetMovef(mx + bufx + 1, my + bufy)) && !(map->GetMovef(mx + bufx, my + bufy + 1))) {
+								shave_f = true;
+							}
 
-							if (cnt > 1 && shave_bool[bufx][bufy] == false && map->GetCell(mx + bufx, my + bufy)->GetMovef() == true && m_shavefvec[bufx][bufy] == m_shavef) { shave_bool[bufx][bufy] = true; shave_count++; }
+							if (shave_f && shave_bool[bufx][bufy] == false && map->GetCell(mx + bufx, my + bufy)->GetMovef() == true && m_shavefvec[bufx][bufy] == m_shavef) { shave_bool[bufx][bufy] = true; shave_count++; }
 						}
 
 
@@ -711,15 +730,20 @@ std::vector<int> SectionAdmin::GetConnectGroup(std::vector<std::vector<int>> m_c
 
 //
 bool SectionAdmin::ConnectCheck(const std::vector<std::vector<int>> m_combination, const int size, std::vector<bool>& m_exist_f) {
+
 	std::vector<bool> buf;
-	return ConnectCheck(m_combination, size, m_exist_f, m_combination[0][0], buf);;
+	if (m_combination.size() > 0) {
+		return ConnectCheck(m_combination, size, m_exist_f, m_combination[0][0], buf);
+		}
+	else {
+		return false;
+	}
 }
 bool SectionAdmin::ConnectCheck(const std::vector<std::vector<int>> m_combination, const int size, std::vector<bool>& m_exist_f, int first_section_number, std::vector<bool>& r_connect_f) {
 	
 	//first_section_number = 接続について調べる時の親となるセクション番号
 
 	//m_combination[i][2]
-
 
 	
 	std::vector<bool> m_connect_f(size, false);//その部屋は接続済みか
@@ -730,6 +754,10 @@ bool SectionAdmin::ConnectCheck(const std::vector<std::vector<int>> m_combinatio
 	//r_exist_f = m_exist_f;
 
 	bool flag;
+
+	if (m_combination.size() == 0) {
+		return false;
+	}
 
 	/*
 	printfDx("size %d, fsn %d ", size,first_section_number);
@@ -746,7 +774,7 @@ bool SectionAdmin::ConnectCheck(const std::vector<std::vector<int>> m_combinatio
 		}
 		else {
 			printfDx("ConnectCheck Error <m_combination>\n");
-			WaitKey();
+			//WaitKey();
 			return false;
 		}
 		if (m_combination[i][1] >= 0 && m_combination[i][1] < size) {
@@ -754,7 +782,7 @@ bool SectionAdmin::ConnectCheck(const std::vector<std::vector<int>> m_combinatio
 		}
 		else {
 			printfDx("ConnectCheck Error <m_combination>\n");
-			WaitKey();
+			//WaitKey();
 			return false;
 		}
 	}
@@ -836,7 +864,7 @@ std::vector<std::vector<int>> SectionAdmin::DeleteSectionCombination(std::vector
 	}
 
 	int cnt = 0;
-	std::vector<int> rs = RandomSwap(0, (signed int)size(m_section_combination) - 1);
+	std::vector<int> rs = MyMethod::RandomSwap(0, (signed int)size(m_section_combination) - 1);
 
 	for (int i = 0; i < (signed int)rs.size(); i++) {
 		//printfDx("loop start\n");
@@ -914,7 +942,6 @@ std::vector<std::vector<int>> SectionAdmin::DeleteSectionCombination(std::vector
 			*/
 			m_delete_road_num--;
 
-
 			if (m_delete_road_num > 0) {
 				return DeleteSectionCombination(buf_section_combination, m_delete_road_num, m_exist_f);
 			}
@@ -929,13 +956,13 @@ std::vector<std::vector<int>> SectionAdmin::DeleteSectionCombination(std::vector
 Room* SectionAdmin::MakeShop(double percentage) {
 	Room* buf_room = NULL;
 
-	std::vector<int> rs = RandomSwap(0, (signed int)sections.size() - 1);
+	std::vector<int> rs = MyMethod::RandomSwap(0, (signed int)sections.size() - 1);
 
 	for (int i = 0; i < (signed int)rs.size(); i++) {
 		int j = rs[i];
 		if (sections[j]->GetRoomf()) {
 			buf_room = sections[j]->GetRoom();
-			if ((buf_room->GetSizeX() >= floordata->GetShopsizeMin() && buf_room->GetSizeY() >= floordata->GetShopsizeMin()) && buf_room->GetSizeX() <= floordata->GetShopsizeMax() && buf_room->GetSizeY() <= floordata->GetShopsizeMax()) {
+			if ((buf_room->GetSizeX() >= floordata->GetShopsizeMin() + 2 && buf_room->GetSizeY() >= floordata->GetShopsizeMin() + 2) && buf_room->GetSizeX() <= floordata->GetShopsizeMax() + 2 && buf_room->GetSizeY() <= floordata->GetShopsizeMax() + 2) {
 				break;
 			}
 		}
@@ -966,7 +993,7 @@ void SectionAdmin::MakeTrap(int traps) {
 	for (int i = 0; i < traps; i++) {
 		if (GetRandomRoomFloor(&m_x, &m_y)) {
 			map->GetCell(m_x, m_y)->SetCellData(celldata_admin->GetCellData(TRAP_FLOOR));
-			map->GetCell(m_x, m_y)->SetTrapData(trapdata_admin->GetTrapData((TRAPTYPE)GetRand((int)TRAPTYPE_NUM - 2) + 1));
+			map->GetCell(m_x, m_y)->SetTrapData(trapdata_admin->GetTrapDataRand());
 		}
 		else {
 			printfDx("MakeTrap is failed\n");
@@ -984,7 +1011,34 @@ void SectionAdmin::MakeStep() {
 	}
 }
 
+std::vector<Room*> SectionAdmin::GetSwapedRoom() {
+	std::vector<Room*> rooms = GetRoomAll();
+	std::vector<Room*> swaped_rooms;
+	std::vector<int> rs_room = MyMethod::RandomSwap(0, rooms.size() - 1);
 
+	for (int i = 0; i < (signed int)rooms.size(); i++) {
+		swaped_rooms.push_back(rooms[rs_room[i]]);
+	}
+	return swaped_rooms;
+}
+
+std::vector<Room*> SectionAdmin::GetRoomAll() {
+	std::vector<Room*> rooms;
+	for (int i = 0; i < (signed int) sections.size(); i++) {
+		if (sections[i]->GetRoomf()) {
+			rooms.push_back(sections[i]->GetRoom());
+		}
+	}
+	return rooms;
+}
+
+
+Room* SectionAdmin::GetRandomRoom() {
+	std::vector<Room*> rooms = GetRoomAll();
+	return rooms[GetRand(rooms.size() - 1)];
+}
+
+/*
 Room* SectionAdmin::GetRandomRoom() {
 	Section* buf_section;
 	int cnt = 0;
@@ -999,6 +1053,7 @@ Room* SectionAdmin::GetRandomRoom() {
 		}
 	};
 }
+*/
 
 Room* SectionAdmin::GetRandomRoom_Square() {
 
@@ -1058,8 +1113,6 @@ bool SectionAdmin::GetRoomFloor(Room* buf_room, int* r_x, int* r_y) {
 	int m_sizey = buf_section->GetRoom()->GetSizeY();
 	*/
 
-
-
 	int m_x = buf_room->GetX();
 	int m_y = buf_room->GetY();
 	int m_sizex = buf_room->GetSizeX();
@@ -1068,31 +1121,28 @@ bool SectionAdmin::GetRoomFloor(Room* buf_room, int* r_x, int* r_y) {
 	int room_floor_x;
 	int room_floor_y;
 
-	int cnt = 0;
+	bool flag = false;
 
-	std::vector<int> rs = RandomSwap(0, m_sizex*m_sizey - 1);
+
+	std::vector<int> rs = MyMethod::RandomSwap(0, m_sizex*m_sizey - 1);
 
 	for (int i = 0; i < (signed int)rs.size(); i++) {
-//	while (1) {
-		/*
-		cnt++;
-		if (cnt > 10000) {
 
-			return false;
-		}
-		*/
-		/*
-		room_floor_x = m_x + GetRand(m_sizex - 1);
-		room_floor_y = m_y + GetRand(m_sizey - 1);
-		*/
 		room_floor_x = m_x + rs[i] % m_sizex;
 		room_floor_y = m_y + rs[i] / m_sizex;
 
-		if (map->GetCell(room_floor_x - 1, room_floor_y)->GetCellData()->GetCellType() != ROAD_FLOOR &&
-			map->GetCell(room_floor_x, room_floor_y - 1)->GetCellData()->GetCellType() != ROAD_FLOOR &&
-			map->GetCell(room_floor_x, room_floor_y + 1)->GetCellData()->GetCellType() != ROAD_FLOOR &&
-			map->GetCell(room_floor_x + 1, room_floor_y)->GetCellData()->GetCellType() != ROAD_FLOOR
-			) {
+		std::vector<std::vector<int >> ec_all = buf_room->GetEntranceCell_All();
+
+		flag = true;
+		for (int j = 0; j < (signed int)ec_all.size(); j++) {
+			if ((abs(ec_all[j][0] - room_floor_x) <= 1 && abs(ec_all[j][1] - room_floor_y) == 0) ||
+				(abs(ec_all[j][0] - room_floor_x) == 0 && abs(ec_all[j][1] - room_floor_y) <= 1) ){
+				flag = false;
+				break;
+			}
+		}
+
+		if (flag) {
 			if (
 				map->GetCell(room_floor_x, room_floor_y)->GetCellData()->GetMovef() &&
 				!map->GetCell(room_floor_x, room_floor_y)->GetCellData()->GetShopf() &&
@@ -1107,6 +1157,17 @@ bool SectionAdmin::GetRoomFloor(Room* buf_room, int* r_x, int* r_y) {
 	}
 
 	return true;
+}
+
+std::vector<Room*> SectionAdmin::GetMonsterhouseRooms() {
+	std::vector<Room*> rooms = GetRoomAll();
+	std::vector<Room*> mh_rooms;
+	for (int i = 0; i < (signed int)rooms.size(); i++) {
+		if (rooms[i]->IsMonsterhouse()) {
+			mh_rooms.push_back(rooms[i]);
+		}
+	}
+	return mh_rooms;
 }
 
 void SectionAdmin::SetRoomTempAll() {
@@ -1281,6 +1342,12 @@ void SectionAdmin::SetFloorData(FloorData* m_floordata) { floordata = m_floordat
 
 
 std::vector<std::vector<SHAVE_F>> SectionAdmin::RoomShaveMarking(Room* m_room) {
+	
+	if (m_room == NULL) {
+		printfDx("RoomShaveMarking *Room is NULL\n");
+		//WaitKey();
+	}
+
 	std::vector<std::vector<SHAVE_F>> mark(m_room->GetSizeX(), std::vector<SHAVE_F>(m_room->GetSizeY(), SHAVE_FALSE));
 
 	int m_x, m_y, min_i_param[8], buf_param, d_param;
@@ -1831,7 +1898,7 @@ bool SectionAdmin::MakeRoadPointToPoint(int m_x1, int m_y1, int m_x2, int m_y2, 
 		0 > m_y2) {
 
 		printfDx("MakeRoadPointToPoint error");
-		WaitKey();
+		//WaitKey();
 		return false;
 	}
 
@@ -1941,9 +2008,14 @@ bool SectionAdmin::MakeRoadPointToPoint(int m_x1, int m_y1, int m_x2, int m_y2, 
 
 
 Section* SectionAdmin::MakeSection(int m_depth, int m_x, int m_y, int m_size_x, int m_size_y, Section* m_p_section) {
+	if (m_size_x < floordata->GetRoomsizeMin() + 4 || m_size_y < floordata->GetRoomsizeMin() + 4) {
+		printfDx("MakeSection Error m_size_x = %d, m_size_y = %d, m_depth = %d, sections.size() = %d\n", m_size_x, m_size_y, m_depth, sections.size());
+		WaitKey();
+	}
+
 	sections.push_back(new Section());
 	Section* this_section = sections.back();
-	int number = (signed int)sections.size() - 1;
+	int number = (signed int)sections.size() - 1;	
 
 	this_section->SetNumber(number);
 	this_section->SetX(m_x);
@@ -1952,9 +2024,9 @@ Section* SectionAdmin::MakeSection(int m_depth, int m_x, int m_y, int m_size_x, 
 	this_section->SetSizeY(m_size_y);
 	this_section->SetDepth(m_depth);
 	this_section->SetPSection(m_p_section);
-	if (m_p_section != NULL) {
-		m_p_section->SetChildf(true);
-	}
+	
+	this_section->SetChildf(true);
+
 
 	//DrawBox(160 + m_x, m_y, 160 + m_x + m_size_x + 1, m_y + m_size_y + 1, GetColor(255, 255, 255), false);
 	//WaitKey();
@@ -1969,16 +2041,29 @@ bool SectionAdmin::DevideSection(Section* m_section,int m_devide, int m_num_sect
 	int size_x = m_section->GetSizeX();
 	int size_y = m_section->GetSizeY();
 
+	new_sections.clear();
+
+	if (m_num_section <= 1) {
+		new_sections.push_back(m_section);
+		return true;
+	}
+
 	if ((m_devide == 1 && size_x >= m_num_section*section_max) || (m_devide == 0 && size_y >= m_num_section*section_max)) {
-		printfDx("DevideSection Error 1\n");
+		//printfDx("DevideSection Error 1\n");
 		//WaitKey();
-		return false; //親の空間が大きすぎる
+		//return false; //親の空間が大きすぎる
+
+		//分割数を増やせば実現可能？
+		return DevideSection(m_section, m_devide, m_num_section + 1, section_min, section_max, new_sections);
 	}
 
 	if ((m_devide == 1 && size_x < m_num_section*section_min) || (m_devide == 0 && size_y < m_num_section*section_min)) {
 		//printfDx("DevideSection Error 2 : %d,%d,%d,%d %d\n", m_devide,size_x, size_y, m_num_section, section_min);
 		//WaitKey();
-		return false; //親に十分な空間が無い
+		//return false; //親に十分な空間が無い
+
+		//分割数を少なくすれば実現可能？
+		return DevideSection(m_section, m_devide, m_num_section - 1, section_min, section_max, new_sections);
 	}
 
 	std::vector<int> size_devide(m_num_section, section_min);//各部屋の広さを宣言しつつ、最低領域分を格納
@@ -1998,7 +2083,7 @@ bool SectionAdmin::DevideSection(Section* m_section,int m_devide, int m_num_sect
 	int cnt = 0;
 
 	for (int i = 0; i < loop ; i++) {
-		if ((GetRand(loop - i - 1) < stick) || (cnt >= section_max)) {
+		if ((GetRand(loop - i - 1) < stick) || (cnt >= section_max)) {//○と｜を置いていく作業
 			stick--;
 			cnt = 0;
 		}
@@ -2016,6 +2101,14 @@ bool SectionAdmin::DevideSection(Section* m_section,int m_devide, int m_num_sect
 		point = x;
 	}
 	
+	//sectionの大きさが正しいか確認
+	for (int i = 0; i < (signed int)size_devide.size(); i++) {
+		if (size_devide[i] < section_min) {
+			printfDx("SectionDevide Error size_devide[%d] = %d, min =  %d", i, size_devide[i], section_min);
+			//WaitKey();
+		}
+	}
+
 
 
 	//子section作成
@@ -2028,7 +2121,7 @@ bool SectionAdmin::DevideSection(Section* m_section,int m_devide, int m_num_sect
 		}
 		point += size_devide[i];
 	}
-
+	m_section->SetChildf(false);
 	
 
 	return true;
@@ -2036,10 +2129,12 @@ bool SectionAdmin::DevideSection(Section* m_section,int m_devide, int m_num_sect
 
 void SectionAdmin::MakeAllSection(DUNGEON_MAKE_MODE make_mode) {
 	std::vector<Section*> buf_sections;
+	std::vector<Section*> buf_sections2;
 	std::vector<Section*> next_psection;
+
 	next_psection.push_back(sections.back());
 
-	int max, devide = 0;
+	int max, devide = GetRand(1);
 	if (floordata->GetFloorsizeX() > floordata->GetFloorsizeY()) {
 		max = floordata->GetFloorsizeX();
 	}
@@ -2048,13 +2143,13 @@ void SectionAdmin::MakeAllSection(DUNGEON_MAKE_MODE make_mode) {
 	}
 
 	if (make_mode == DEPTH_FIRST_RAND || make_mode == DEPTH_FIRST_LARGER || make_mode == DEPTH_FIRST_DEVIDE_LARGER) {
-		for (int i = 0; i < floordata->GetMakeroomNum(0)- 1; i++) {
-			if (!DevideSection(sections.back(),devide, 2, (floordata->GetRoomsizeMin() + 2) * 2, max, buf_sections)) {
+		for (int i = 0; i < floordata->GetMakeroomNum(0) - 1; i++) {
+			if (!DevideSection(sections.back(), devide, 2, (floordata->GetRoomsizeMin() + 4) * 2, max, buf_sections)) {
 				break;
 			}
 			if (make_mode == DEPTH_FIRST_RAND) {
 				next_psection[0] = buf_sections[GetRand((signed int)buf_sections.size() - 1)];
-				devide = (i + 1) % 2;
+				devide = (devide + 1) % 2;
 			}
 			if (make_mode == DEPTH_FIRST_LARGER) {
 				if (buf_sections[0]->GetSizeX() * buf_sections[0]->GetSizeY() > buf_sections[1]->GetSizeX() * buf_sections[1]->GetSizeY()) {
@@ -2063,7 +2158,7 @@ void SectionAdmin::MakeAllSection(DUNGEON_MAKE_MODE make_mode) {
 				else {
 					next_psection[0] = buf_sections[1];
 				}
-				devide = (i + 1) % 2;
+				devide = (devide + 1) % 2;
 			}
 			if (make_mode == DEPTH_FIRST_DEVIDE_LARGER) {
 				if (buf_sections[0]->GetSizeX() * buf_sections[0]->GetSizeY() > buf_sections[1]->GetSizeX() * buf_sections[1]->GetSizeY()) {
@@ -2078,20 +2173,31 @@ void SectionAdmin::MakeAllSection(DUNGEON_MAKE_MODE make_mode) {
 				else {
 					devide = 0;
 				}
-				
-			}
-		}
 
-		for (int i = 0; i < (signed int)sections.size(); i++) {
-			if (!sections[i]->GetChildf()) {
-				sections[i]->SetRoomMakef(true);
 			}
 		}
 
 	}
 
 	if (make_mode == WIDTH_FIRST) {
-		for (int i = 0; i*i <= floordata->GetMakeroomNum(0); i++) {
+
+		int count = 2;
+		int depth = 0;
+		while(1) {
+			if (floordata->GetMakeroomNum(0) < count) {
+				break;
+			}
+			count *= 2;
+			depth++;
+		}
+
+		for (int i = 0; i < depth; i++) {
+			//とちゅう
+			for (int j = 0; j < (signed int)next_psection.size(); j++) {
+				DevideSection(next_psection[j], i % 2, 2, (floordata->GetRoomsizeMin() + 2) * 2, max, buf_sections);
+
+			}
+
 			if (!DevideSection(sections.back(), i % 2, 2, (floordata->GetRoomsizeMin() + 2) * 2, max, buf_sections)) {
 				break;
 			}
@@ -2100,27 +2206,79 @@ void SectionAdmin::MakeAllSection(DUNGEON_MAKE_MODE make_mode) {
 				next_psection.push_back(buf_sections[j]);
 			}
 		}
-		for (int i = 0; i < (signed int)sections.size(); i++) {
-			if (!sections[i]->GetChildf()) {
-				sections[i]->SetRoomMakef(true);
-			}
-		}
 	}
 
 	if (make_mode == EVEN_DEVIDE) {
-		devide = 1;
-		DevideSection(sections.back(), devide, floordata->GetMakeroomNum(0), (floordata->GetRoomsizeMin() + 2) * 2, max, buf_sections);
-		devide = 0;
-		for (int i = 0; i < floordata->GetMakeroomNum(0); i++) {
-			DevideSection(buf_sections[i], devide, floordata->GetMakeroomNum(1), (floordata->GetRoomsizeMin() + 2) * 2, max, buf_sections);
+
+		int sx = 2 + GetRand(floordata->GetMakeroomNum(0) - 2);
+
+		DevideSection(sections.back(), devide, sx, (floordata->GetRoomsizeMin() + 4) * 2, max, buf_sections);
+		devide = (devide + 1) % 2;
+
+		int sy = (unsigned int)floordata->GetMakeroomNum(0) / buf_sections.size() + 1;
+
+		for (int i = 0; i < (signed int)buf_sections.size(); i++) {
+			DevideSection(buf_sections[i], devide, sy, (floordata->GetRoomsizeMin() + 4) * 2, max, buf_sections2);
 		}
 	}
 
-	for (int i = 0; i < (signed int)sections.size(); i++) {
-		if (sections[i]->GetRoomMakef()) {
-			sections[i]->MakeRoom(floordata->GetRoomsizeMin(), floordata->GetRoomsizeMax());
-		}
-	}
+	MakeRooms(sections, floordata);
 
 }
 
+
+
+void SectionAdmin::MakeRooms(std::vector<Section*> m_sections, FloorData* m_floordata) {
+
+	std::vector<Section*> child_sections;
+	int room_num = m_floordata->GetMakeroomNum(0);
+
+	for (int i = 0; i < (signed int)m_sections.size(); i++) {
+		if (sections[i]->GetChildf()) {
+			child_sections.push_back(m_sections[i]);
+		}
+	}
+
+	if (room_num < (signed int)child_sections.size()) { //この場合は全ての子セクションに部屋を作っても足りないので、すべてのセクションに部屋を作る
+		std::vector<int> rs = MyMethod::RandomSwap(0, room_num - 1);
+
+		for (int i = 0; i < (signed int)rs.size(); i++) {
+			child_sections[rs[i]]->SetRoomMakef(true);
+		}
+	}
+	else {
+		for (int i = 0; i < (signed int)child_sections.size(); i++) {
+			child_sections[i]->SetRoomMakef(true);
+		}
+	}
+	for (int i = 0; i < (signed int)child_sections.size(); i++) {
+		if (child_sections[i]->GetRoomMakef()) {
+			child_sections[i]->MakeRoom(m_floordata->GetRoomsizeMin(), m_floordata->GetRoomsizeMax());
+		}
+	}
+
+
+}
+
+//DEBUG
+void SectionAdmin::SetMiniMap(MiniMap* _minimap) {
+	minimap = _minimap;
+}
+
+
+
+
+/*メモ*/
+/*
+ダンジョン生成において設定できるパラメータ
+
+//Section割のアルゴリズムの選択<DUNGEON_MAKE_MODE>
+
+DEPTH_FIRST_RAND　深さ優先形式。セクションを作り、適当に2分割し、その一方をランダムに選んで2分割、を繰り返す。部屋が増えにくい
+DEPTH_FIRST_LARGER　深さ優先形式。セクションを作り、適当に2分割し、面積の大きい方を選んで2分割、を繰り返す。
+DEPTH_FIRST_DEVIDE_LARGER　深さ優先形式。セクションを作り、適当に2分割し、面積の大きい方を選んで、長辺を垂直に切る方向に2分割、を繰り返す。
+
+WIDTH_FIRST　幅優先形式。セクションを作り、適当に2分割し、そのそれぞれについて2分割、を繰り返す。
+EVEN_DEVIDE,　格子状に分割し、そのうちのいくつかのセクションに対して部屋を作る。
+
+*/

@@ -19,7 +19,6 @@ void TrapProcess::Init(UnitAdmin* _unitAdmin, MessageAdmin* _messageAdmin, ItemA
 	unitAdmin = _unitAdmin;
 	messageAdmin = _messageAdmin;
 	itemAdmin = _itemAdmin;
-
 }
 
 

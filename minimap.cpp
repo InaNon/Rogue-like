@@ -32,7 +32,14 @@ void MiniMap::MiniMapClear() {
 			minimap[i][j] = false;
 		}
 	}
+}
 
+void MiniMap::MiniMapFullOpen() {
+	for (int i = 0; i < map_admin->GetMap()->GetSizeX(); i++) {
+		for (int j = 0; j < map_admin->GetMap()->GetSizeY(); j++) {
+			minimap[i][j] = true;
+		}
+	}
 }
 
 
@@ -42,11 +49,7 @@ void MiniMap::Update(int num) {
 	int m_y = unit_admin->GetUnit(num)->GetMAPY();
 	
 	if (DEBUG_MINI_MAP_FULL_OPEN) {
-		for (int i = 0; i < map_admin->GetMap()->GetSizeX(); i++) {
-			for (int j = 0; j < map_admin->GetMap()->GetSizeY(); j++) {
-				minimap[i][j] = true;
-			}
-		}
+		MiniMapFullOpen();
 	}
 
 
@@ -94,10 +97,10 @@ void MiniMap::Draw() {
 		for (int j = 0; j < map_admin->GetMap()->GetSizeY(); j++) {
 			if (minimap[i][j]) {
 				if (map_admin->GetMapCellData(i,j)->GetMovef()) {
-					DrawGraph(ORIGIN_WINDOWSIZE_X / 2 + i*MINIMAP_CELL_SIZE, j*MINIMAP_CELL_SIZE, graphic_handle[0], false);
+					DrawGraph(WINDOWSIZE_X / 2 + i*MINIMAP_CELL_SIZE, j*MINIMAP_CELL_SIZE, graphic_handle[0], false);
 				} else {
 					if (map_admin->GetMapCellData(i, j)->GetSlantMovef()) {
-						DrawGraph(ORIGIN_WINDOWSIZE_X / 2 + i*MINIMAP_CELL_SIZE, j*MINIMAP_CELL_SIZE, graphic_handle[1], false);
+						DrawGraph(WINDOWSIZE_X / 2 + i*MINIMAP_CELL_SIZE, j*MINIMAP_CELL_SIZE, graphic_handle[1], false);
 					};
 				}
 			}
@@ -109,12 +112,12 @@ void MiniMap::Draw() {
 	for (int i = 0; i < UNIT_MAX; i++) {
 		if (unit_admin->GetUnit(i)->GetExist()) {
 			if (i == 0) {
-				DrawGraph(ORIGIN_WINDOWSIZE_X /2+ unit_admin->GetUnit(i)->GetMAPX()*MINIMAP_CELL_SIZE, unit_admin->GetUnit(i)->GetMAPY()*MINIMAP_CELL_SIZE, graphic_handle[2], false);
+				DrawGraph(WINDOWSIZE_X /2+ unit_admin->GetUnit(i)->GetMAPX()*MINIMAP_CELL_SIZE, unit_admin->GetUnit(i)->GetMAPY()*MINIMAP_CELL_SIZE, graphic_handle[2], false);
 			}
 			else {
 				buf_room_e = map_admin->GetSectionAdmin()->GetRoom(unit_admin->GetUnit(i)->GetMAPX(), unit_admin->GetUnit(i)->GetMAPY());
 				if (buf_room_p == buf_room_e && buf_room_p != NULL || DEBUG_MINI_MAP_FULL_OPEN) {
-					DrawGraph(ORIGIN_WINDOWSIZE_X / 2 + unit_admin->GetUnit(i)->GetMAPX()*MINIMAP_CELL_SIZE, unit_admin->GetUnit(i)->GetMAPY()*MINIMAP_CELL_SIZE, graphic_handle[3], false);
+					DrawGraph(WINDOWSIZE_X / 2 + unit_admin->GetUnit(i)->GetMAPX()*MINIMAP_CELL_SIZE, unit_admin->GetUnit(i)->GetMAPY()*MINIMAP_CELL_SIZE, graphic_handle[3], false);
 				}
 			}
 
@@ -127,7 +130,7 @@ void MiniMap::Draw() {
 			std::vector<std::vector<int >> ec_all = map_admin->GetSectionAdmin()->GetRoom(i)->GetEntranceCell_All();
 			
 			for (int j = 0; j < map_admin->GetSectionAdmin()->GetRoom(i)->GetEntranceCellSize(); j++) {
-				DrawGraph(ORIGIN_WINDOWSIZE_X / 2 + ec_all[j][0] * MINIMAP_CELL_SIZE, ec_all[j][1] * MINIMAP_CELL_SIZE, graphic_handle[4], false);
+				DrawGraph(WINDOWSIZE_X / 2 + ec_all[j][0] * MINIMAP_CELL_SIZE, ec_all[j][1] * MINIMAP_CELL_SIZE, graphic_handle[4], false);
 			}
 		}
 	}

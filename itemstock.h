@@ -9,6 +9,7 @@ private:
 
 	bool exist;
 	bool equiped;
+	BELONG belong;
 
 public:
 	ItemData* GetItemData();
@@ -17,7 +18,8 @@ public:
 	void SetExist(bool);
 	bool GetEquiped();
 	void SetEquiped(bool);
-
+	BELONG GetBelong();
+	void SetBelong(BELONG);
 
 	ItemStock();
 	~ItemStock();

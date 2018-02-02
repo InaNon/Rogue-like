@@ -18,6 +18,8 @@ public:
 	void SetItemDataToItemStock(ItemData*, int);
 	void LostItemStock(int);
 	int GetItemNum();
+	int GetTotalBuy();
+	void BuyItem();
 
 	ItemStockAdmin();
 	~ItemStockAdmin();

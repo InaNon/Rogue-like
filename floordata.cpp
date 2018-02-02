@@ -54,7 +54,7 @@ bool FloorData::GetWallSlant_f() { return wallslant_f; }; //壁斜め
 double FloorData::GetShopRate() { return shop_rate; }; //部屋生成率
 
 double FloorData::GetMonsterhouseRate() { return monsterhouse_rate; };
-
+int FloorData::GetMonsterhouseNum() { return MONSTER_HOUSE_NUM; }
 
 
 /* セッター */

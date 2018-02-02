@@ -34,6 +34,14 @@ void ItemStock::SetEquiped(bool m_equiped) {
 }
 
 
+BELONG ItemStock::GetBelong() {
+
+	return belong;
+}
+void ItemStock::SetBelong(BELONG _belong) {
+
+	belong = _belong;
+}
 
 
 

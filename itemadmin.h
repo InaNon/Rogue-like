@@ -31,6 +31,9 @@ public:
 	void SubtractItemNum();
 	Item* GetItem(int);
 	void PutItem(int, int, ItemData*);
+	int GetTotalSell();
+
+	void SellItem();
 
 	ItemAdmin();
 	~ItemAdmin();

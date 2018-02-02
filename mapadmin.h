@@ -24,10 +24,14 @@ enum MAPCHIP {
 class CellDataAdmin;
 class TrapDataAdmin;
 class Camera;
-class MakeMapGraphic;
+//class MakeMapGraphic;
 class SectionAdmin;
 class DungeonData;
-
+class Room;
+class MakeTileGraphic;
+class TileSetAdmin;
+class MiniMap;
+class TrapProcess;
 
 class MapAdmin {
 protected:
@@ -36,15 +40,22 @@ protected:
 	int graphic_handle[NUM_MAPCHIP];
 	CellDataAdmin* celldata_admin;
 	TrapDataAdmin* trapdata_admin;
-	MakeMapGraphic* make_map_graphic;
+	//MakeMapGraphic* make_map_graphic;
 	SectionAdmin* section_admin;
+	MakeTileGraphic* make_tile_graphic;
+	Camera* camera;
+
+	TrapProcess* trapProcess;
+
+	//DEBUG
+	MiniMap* minimap;
 
 public:
 
 	MapAdmin();
 	//MapAdmin();
 	~MapAdmin();
-	void Init(CellDataAdmin*, TrapDataAdmin*);
+	void Init(CellDataAdmin*, TrapDataAdmin*, TileSetAdmin*, Camera*, TrapProcess*);
 
 	Map* GetMap();
 	//Map* GetExpMap();
@@ -59,6 +70,25 @@ public:
 	bool GetCellAcsessf(int, int);
 
 	void GetRespawnCell(int*, int*);
+	void GetRespawnCellFarAway(int*, int*, int, int, int);
+
+	bool IsInCameraByMapPosition(int, int);
+	bool IsFarAwayByMapPosition(int, int, int, int, int);
+	bool IsTrapFloor(const int, const int);
+
+	bool ActivateTrapFloor(const int, const int);
+
+	bool TrapEvent(const int, const int);
+
+	Room* GetRandomRoom();
+	Room* GetRandomRoom_Square();
+
+	bool GetRoomFloor(Room*, int*, int*);
+	bool GetFloorInRoom(Room*, int*, int*);
+	bool GetRandomRoomFloor(int*, int*);
+
+	Room* GetRoom(int);
+	Room* GetRoom(int, int);
 
 	SectionAdmin* GetSectionAdmin();
 
@@ -66,7 +96,12 @@ public:
 
 	void MakeMap(DungeonData*, int);
 
+	void MapInit(); // MapÇèâä˙çÏê¨
+
 	void Draw(Camera*,bool);
+
+	//DEBUG
+	void MapAdmin::SetMiniMap(MiniMap*);
 };
 
 #endif

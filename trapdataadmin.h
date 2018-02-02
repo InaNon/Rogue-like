@@ -2,6 +2,7 @@
 #define DEF_TrapDataAdmin
 
 #include "define.h"
+#include "trapdata.h"
 #include "Dxlib.h"
 
 #include <vector>
@@ -17,7 +18,12 @@ public:
 
 	void Init();
 
+	TrapData* GetTrapDataRand();
+
+
+	TrapData* GetTrapData(TrapData::TRAPTYPE);
 	TrapData* GetTrapData(int);
+
 };
 
 #endif

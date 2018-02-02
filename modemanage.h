@@ -12,7 +12,7 @@ private:
 	bool message_mode;
 	bool select_mode;
 	bool advance_dungeon_mode;
-
+	bool shop_mode;
 
 public:
 	void Init();
@@ -26,6 +26,8 @@ public:
 	void SetSelectMode(bool);
 	bool GetAdvanceDungeonMode();
 	void SetAdvanceDungeonMode(bool);
+	bool GetShopMode();
+	void SetShopMode(bool);
 
 	ModeManage();
 	~ModeManage();

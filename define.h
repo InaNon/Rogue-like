@@ -1,25 +1,57 @@
 #ifndef DEF_define
 #define DEF_define
 
-
 /*デバッグ用*/
-static const bool DEBUG_MODE_MAP = false;
-static const bool DEBUG_MODE_CAMERA = false;
+static const int DEBUG_MODE_MAP = false;
+static const int DEBUG_MODE_CAMERA = false;
 static const bool DEBUG_F = false;
 static const bool DEBUG_MINI_MAP_FULL_OPEN = true;
 static const bool DEBUG_MODE_DARK = true;
+
 /************/
 
-//高野
-static const int WINDOW_ZOOM = 1;
+//takano
+static const int ZOOM = 1;
 static const int EXP_MAP_X = 22;
 static const int EXP_MAP_Y = 16;
 
-static const int CHIP_X_SIZE = 32;
-static const int CHIP_Y_SIZE = 32;
+static const int CHIP_X_SIZE = 32;//ina 32
+static const int CHIP_Y_SIZE = 32;//ina 32
 
 static const int EXPCHIPSIZE_X = EXP_MAP_X;
 static const int EXPCHIPSIZE_Y = EXP_MAP_Y;
+
+static const int MAP_X_MAX = 64;
+static const int MAP_Y_MAX = 64;//ina 48
+
+static const int EXPMAP_X_MAX = MAP_X_MAX + EXPCHIPSIZE_X;
+static const int EXPMAP_Y_MAX = MAP_Y_MAX + EXPCHIPSIZE_Y;
+
+static const int WINDOWSIZE_X = EXP_MAP_X * CHIP_X_SIZE;
+static const int WINDOWSIZE_Y = EXP_MAP_Y * CHIP_Y_SIZE;
+
+
+//ina0125
+//static const int WINDOW_ZOOM = 1;
+
+static const int ORIGIN_WINDOWSIZE_X = EXP_MAP_X * CHIP_X_SIZE;
+static const int ORIGIN_WINDOWSIZE_Y = EXP_MAP_Y * CHIP_Y_SIZE;
+
+//static const int WINDOWSIZE_X = EXP_MAP_X * CHIP_X_SIZE * WINDOW_ZOOM;
+//static const int WINDOWSIZE_Y = EXP_MAP_Y * CHIP_Y_SIZE * WINDOW_ZOOM;
+//static const int MINIMAP_CELL_SIZE = 2;
+
+
+//static const int ZOOM = 1;
+
+/*
+static const int CHIP_X_SIZE = 32;
+static const int CHIP_Y_SIZE = 32;
+
+static const int ZOOM = 1;
+
+static const int EXPCHIPSIZE_X = 20;
+static const int EXPCHIPSIZE_Y = 16;
 
 static const int MAP_X_MAX = 64;
 static const int MAP_Y_MAX = 48;
@@ -27,15 +59,16 @@ static const int MAP_Y_MAX = 48;
 static const int EXPMAP_X_MAX = MAP_X_MAX + EXPCHIPSIZE_X;
 static const int EXPMAP_Y_MAX = MAP_Y_MAX + EXPCHIPSIZE_Y;
 
-static const int ORIGIN_WINDOWSIZE_X = EXP_MAP_X * CHIP_X_SIZE;
-static const int ORIGIN_WINDOWSIZE_Y = EXP_MAP_Y * CHIP_Y_SIZE;
+static const int WINDOWSIZE_X = EXPCHIPSIZE_X * CHIP_X_SIZE;
+static const int WINDOWSIZE_Y = EXPCHIPSIZE_Y * CHIP_Y_SIZE;
+*/
 
-static const int WINDOWSIZE_X = EXP_MAP_X * CHIP_X_SIZE * WINDOW_ZOOM;
-static const int WINDOWSIZE_Y = EXP_MAP_Y * CHIP_Y_SIZE * WINDOW_ZOOM;
+static const int MIN_ROOM_SIZE = 3;
+static const int MIN_SECTION_SIZE = MIN_ROOM_SIZE + 4;
+
 static const int MINIMAP_CELL_SIZE = 2;
 
-
-//稲垣
+/*いな*/
 static const int UNIT_MAX = 256;
 
 static const int MESSAGE_MAX = 64;
@@ -51,6 +84,7 @@ static const int OLD_MAX = 16;
 static const int ITEM_DATA_MAX = 256;
 static const int UNIT_DATA_MAX = 256;
 static const int SOUND_DATA_MAX = 256;
+
 
 static const int ITEM_MAX = 128;
 
@@ -73,6 +107,13 @@ static const int IMAGE_CHIP_SIZE_X = 24;
 static const int IMAGE_CHIP_SIZE_Y = 24;
 
 
+
+
+enum BELONG {
+	PLAYER,
+	SHOP,
+};
+
 enum ITEM_KIND {
 	STATUS_ITEM,
 	EQUIP_ITEM,
@@ -83,6 +124,8 @@ enum EQUIPMENT_KIND {
 	SHIELD,
 	RING,
 };
+
+
 
 enum SHAVE_F {
 	SHAVE_FALSE,
@@ -107,28 +150,6 @@ enum MINIMAP {
 	MINIMAP_NUM,
 };
 
-enum TRAPTYPE {
-	NONE_TRAPTYPE,
-	TRAP_BOMB,
-	TRAP_NEEDLE,
-	TRAP_ARROW,
-	TRAPTYPE_NUM
-};
-
-enum COMMAND {
-	UP = 1,
-	UP_RIGHT,
-	RIGHT,
-	DOWN_RIGHT,
-	DOWN,
-	DOWN_LEFT,
-	LEFT,
-	UP_LEFT,
-	STOP,
-	ATTACK,
-	NOTHING = 100
-};
-
 enum BOXNUM {
 	MENU,
 	ITEM,
@@ -142,6 +163,7 @@ enum BOXNUM {
 	EXPLAIN,
 	NOBOX = 63,
 };
+
 
 enum CELLTYPE {
 	NONE_CELLTYPE,
@@ -173,6 +195,27 @@ enum AUTO_CELL_TYPE {
 	DOWN_RIGHT_EMPTY_CELL,
 
 	AUTO_CELL_TYPE_NUM = 15
+};
+
+/*
+enum DIRECTION {
+	NONE_DIRECTION, DIR_LEFT, DIR_UP, DIR_RIGHT, DIR_DOWN
+};
+*/
+
+
+enum COMMAND {
+	UP = 1,
+	UP_RIGHT,
+	RIGHT,
+	DOWN_RIGHT,
+	DOWN,
+	DOWN_LEFT,
+	LEFT,
+	UP_LEFT,
+	STOP,
+	ATTACK,
+	NOTHING = 100
 };
 
 enum DIRECTION {

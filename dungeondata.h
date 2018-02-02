@@ -23,7 +23,7 @@ public:
 	FloorData* GetFloorData(int);
 
 	void EmplaceFloorData(int);
-
+	void PrintDungeonData(int);
 };
 
 #endif

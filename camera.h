@@ -5,11 +5,12 @@ class Unit;
 
 class Camera {
 protected:
-	/*カメラ左上座標*/
+	/*カメラ中心*/
 	int x; 
 	int y;
 	int sizex;
 	int sizey;
+	int mapzoom;
 
 public:
 
@@ -22,11 +23,13 @@ public:
 	int GetY();
 	int GetSizeX();
 	int GetSizeY();
+	int GetMapZoom();
 
 	void SetX(int);
 	void SetY(int);
 	void SetSizeX(int);
 	void SetSizeY(int);
+	void SetMapZoom(int);
 
 	int GetDrawX(int m_x);
 	int GetDrawY(int m_y);

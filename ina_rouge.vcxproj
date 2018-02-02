@@ -75,6 +75,8 @@
     <ClInclude Include="selectboxadmin.h" />
     <ClInclude Include="shop.h" />
     <ClInclude Include="simpletileimage.h" />
+    <ClInclude Include="sounddata.h" />
+    <ClInclude Include="sounddataadmin.h" />
     <ClInclude Include="stagefloorobjectpropety.h" />
     <ClInclude Include="status.h" />
     <ClInclude Include="statusitemdata.h" />
@@ -121,7 +123,6 @@
     <ClCompile Include="itemstockadmin.cpp" />
     <ClCompile Include="listbox.cpp" />
     <ClCompile Include="loaddatabase.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="maketilegraphic.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="mapadmin.cpp" />
@@ -131,6 +132,7 @@
     <ClCompile Include="minimap.cpp" />
     <ClCompile Include="modemanage.cpp" />
     <ClCompile Include="mymethod.cpp" />
+    <ClCompile Include="new_i_main.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="objectdata.cpp" />
     <ClCompile Include="objectdataadmin.cpp" />
@@ -145,6 +147,8 @@
     <ClCompile Include="selectboxadmin.cpp" />
     <ClCompile Include="shop.cpp" />
     <ClCompile Include="simpletileimage.cpp" />
+    <ClCompile Include="sounddata.cpp" />
+    <ClCompile Include="sounddataadmin.cpp" />
     <ClCompile Include="stagefloorobjectpropety.cpp" />
     <ClCompile Include="status.cpp" />
     <ClCompile Include="statusitemdata.cpp" />

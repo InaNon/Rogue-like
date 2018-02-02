@@ -18,6 +18,7 @@
 #include "unitdata.h"
 #include "dungeondataadmin.h"
 #include "objectgenerator.h"
+#include "room.h"
 
 
 void UnitAdmin::Init(char* m_key, ItemStockAdmin* m_item_stock_admin, ItemAdmin* m_item_admin, MapAdmin* m_map_admin, MessageAdmin* m_message_admin, SelectBoxAdmin* m_select_box_admin, ModeManage* m_mode_manage, ObjectDataAdmin* m_object_data_admin, DungeonDataAdmin* m_dungeon_data_admin) {
@@ -172,10 +173,10 @@ void UnitAdmin::UnitStateCheck(Unit* attack_unit , Unit* target_unit) {
 
 
 
-
 //ユニットの行動更新
 void UnitAdmin::Update() {
 
+	Room* room = map_admin->GetRoom(unit[0]->GetMAPX(), unit[0]->GetMAPY());
 	unit[0]->direction();
 
 	if (mode_manage->GetMessageMode() == true || mode_manage->GetSelectMode() == true) {
@@ -259,14 +260,53 @@ void UnitAdmin::Update() {
 	//プレイヤーが移動しかつ敵の攻撃がある場合はプレイヤーの移動とアイテムのチェックを行いリクエストとフラグを戻す
 	if (enemy_attack == 1 && player_request >= UP && player_request <= STOP) {
 		if (unit[0]->Move() == 1) {
+
+			//shop処理
+			if (room != NULL) {
+				if (room->IsShopRoom() == true) {
+					if (mode_manage->GetShopMode() == false) {
+						message_admin->AnyMessage("いらっしゃいませ", true);
+						mode_manage->SetShopMode(true);
+					}
+				}else {
+					if (room->IsShopRoom() == false) {
+						if (mode_manage->GetShopMode() == true) {
+							int total_sell = item_admin->GetTotalSell();
+							int total_buy = item_stock_admin->GetTotalBuy();
+							if (total_sell*total_buy != 0) {
+								if (total_sell > 0) {
+									message_admin->AnyMessage("売値は合計1000になります、売りますか?", true);
+									if (list_box_admin->yes_or_no() == true) {
+										unit[0]->SetMoney(unit[0]->GetMoney() + total_sell);
+										item_admin->SellItem();
+										mode_manage->SetShopMode(true);
+									}else {
+										unit[0]->ippomodoru();
+									}
+								}
+								if (total_buy > 0) {
+									message_admin->AnyMessage("買値は合計1000になります、買いますか?", true);
+									if (list_box_admin->yes_or_no() == true) {
+										unit[0]->SetMoney(unit[0]->GetMoney() - total_buy);
+										item_stock_admin->BuyItem();
+										mode_manage->SetShopMode(true);
+									}else {
+										unit[0]->ippomodoru();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 			if (map_admin->GetMapCellData(unit[0]->GetMAPX(), unit[0]->GetMAPY())->GetStepf() == true) {
 				mode_manage->SetAdvanceDungeonMode(true);
-			}
-			else if (item_admin->ItemExistMap(unit[0]->GetMAPX(), unit[0]->GetMAPY()) != NULL) {
+			}else if (item_admin->ItemExistMap(unit[0]->GetMAPX(), unit[0]->GetMAPY()) != NULL) {
 				item_stock_admin->SetItemDataToItemStock(item_admin->ItemExistMap(unit[0]->GetMAPX(), unit[0]->GetMAPY())->GetItemData(), NO_ITEM_STOCK_NUM);
 				item_admin->ItemExistMap(unit[0]->GetMAPX(), unit[0]->GetMAPY())->SetExist(false);
 				item_admin->SubtractItemNum();
 			}
+
 			player_request = NOTHING;
 		}
 	}
@@ -303,6 +343,45 @@ void UnitAdmin::Update() {
 					unit[i]->UpdateMapPosition();
 
 				if (enemy_attack == 0) {
+
+					//shop処理
+					if (room != NULL) {
+						if (room->IsShopRoom() == true) {
+							if (mode_manage->GetShopMode() == false) {
+								message_admin->AnyMessage("いらっしゃいませ", true);
+								mode_manage->SetShopMode(true);
+							}
+						}else {
+							if (room->IsShopRoom() == false) {
+								if (mode_manage->GetShopMode() == true) {
+									int total_sell = item_admin->GetTotalSell();
+									int total_buy = item_stock_admin->GetTotalBuy();
+									if (total_sell*total_buy != 0) {
+										if (total_sell > 0) {
+											message_admin->AnyMessage("売値は合計1000になります、売りますか?", true);
+											if (list_box_admin->yes_or_no() == true) {
+												unit[0]->SetMoney(unit[0]->GetMoney() + total_sell);
+												item_admin->SellItem();
+												mode_manage->SetShopMode(true);
+											}else {
+												unit[0]->ippomodoru();
+											}
+										}
+										if (total_buy > 0) {
+											message_admin->AnyMessage("買値は合計1000になります、買いますか?", true);
+											if (list_box_admin->yes_or_no() == true) {
+												unit[0]->SetMoney(unit[0]->GetMoney() - total_buy);
+												item_stock_admin->BuyItem();
+												mode_manage->SetShopMode(true);
+											}else {
+												unit[0]->ippomodoru();
+											}
+										}
+									}
+								}
+							}
+						}
+					}
 					if (map_admin->GetMapCellData(unit[0]->GetMAPX(), unit[0]->GetMAPY())->GetStepf() == true) {
 						mode_manage->SetAdvanceDungeonMode(true);
 					}else if (item_admin->ItemExistMap(unit[0]->GetMAPX(), unit[0]->GetMAPY()) != NULL) {

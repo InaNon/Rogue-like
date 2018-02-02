@@ -62,7 +62,28 @@ int ItemStockAdmin::GetItemNum() {
 
 }
 
+int ItemStockAdmin::GetTotalBuy() {
 
+	int total_buy = 0;
+
+	for (int i = 0; i < ITEM_STOCK_MAX; i++) {
+		if (item_stock[i]->GetExist() == true && item_stock[i]->GetBelong() == SHOP)
+			total_buy += item_stock[i]->GetItemData()->GetBuy();
+	}
+
+	return total_buy;
+
+
+}
+
+void ItemStockAdmin::BuyItem() {
+
+	for (int i = 0; i < ITEM_MAX; i++) {
+		if (item_stock[i]->GetExist() == true && item_stock[i]->GetBelong() == PLAYER) {
+			item_stock[i]->SetBelong(PLAYER);
+		}
+	}
+}
 
 
 

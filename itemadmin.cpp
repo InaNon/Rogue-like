@@ -9,6 +9,7 @@
 #include "ObjectDataAdmin.h"
 #include "unitadmin.h"
 #include "mapadmin.h"
+#include "itemdata.h"
 
 using namespace std;
 
@@ -89,7 +90,27 @@ void ItemAdmin::PutItem(int map_x, int map_y, ItemData* m_item_data) {
 	}
 }
 
+int ItemAdmin::GetTotalSell() {
 
+	int total_sell = 0;
+
+	for (int i = 0; i < ITEM_MAX; i++) {
+		if (item[i]->GetExist() == true && item[i]->GetBelong() == PLAYER) {
+			total_sell += item[i]->GetItemData()->GetSell();
+		}
+	}
+
+	return total_sell;
+}
+
+void ItemAdmin::SellItem(){
+
+	for (int i = 0; i < ITEM_MAX; i++) {
+		if (item[i]->GetExist() == true && item[i]->GetBelong() == PLAYER) {
+			item[i]->SetBelong(SHOP);
+		}
+	}
+}
 
 ItemAdmin::ItemAdmin() {
 	for (int i = 0; i < ITEM_MAX; i++)

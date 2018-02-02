@@ -18,7 +18,7 @@ CellData* CellDataAdmin::GetCellData(int i) {
 	}
 	catch(int i) {
 		printfDx("GetCellData Error %d", i);
-		WaitKey();
+		//WaitKey();
 		exit(1);
 	}
 };

@@ -15,7 +15,7 @@ class Map;
 class Road;
 class DungeonData;
 class FloorData;
-
+class MiniMap;
 class SectionAdmin {
 protected:
 	
@@ -29,6 +29,9 @@ protected:
 	Map* map;
 	DungeonData* dungeondata;
 	FloorData* floordata;
+
+	//DEBUG
+	MiniMap* minimap;
 
 public:
 
@@ -54,6 +57,7 @@ public:
 	bool GetRandomRoomFloor(int*, int*);
 
 
+	std::vector<Room*> GetRoomAll();
 	Room* GetRoom(int);
 	Room* GetRoom(int, int);
 
@@ -78,12 +82,17 @@ public:
 
 	void MakeHole(Room*);
 
-	void ShaveEdge(Room*, double, std::vector<std::vector<SHAVE_F>>, SHAVE_F);
+	void ShaveEdge(Room*, double, std::vector<std::vector<SHAVE_F>>, SHAVE_F, CELLTYPE);
 
 	std::vector<int> GetConnectGroup(std::vector<std::vector<int>>, int, std::vector<bool>&);
 
 	bool ConnectCheck(const std::vector<std::vector<int>>, const int, std::vector<bool>&);
 	bool ConnectCheck(const std::vector<std::vector<int>>, const int, std::vector<bool>&, int, std::vector<bool>&);
+
+	void MakeMonsterhouse();
+	std::vector<Room*> GetMonsterhouseRooms();
+
+	std::vector<Room*> GetSwapedRoom();
 
 	void SetRoomTempAll();
 	void SetTempToCellDataAll(CELLTYPE, bool, bool);
@@ -97,9 +106,13 @@ public:
 	bool DevideSection(Section* m_section, int, int, int, int, std::vector<Section*>&);
 
 	void MakeAllSection(DUNGEON_MAKE_MODE);
+	void MakeRooms(std::vector<Section*>, FloorData*);
 
 	//Section* MakeSection(DUNGEON_MAKE_MODE, int, int, int, int, int, int);
 
+
+	//DEBUG
+	void SetMiniMap(MiniMap*);
 };
 
 #endif

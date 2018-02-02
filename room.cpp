@@ -31,8 +31,36 @@ void Room::MakeRoom(int m_x,int m_y,int m_sizex,int m_sizey,int min_x,int min_y)
 
 
 void Room::MakeRoom(int m_x,int m_y,int m_sizex,int m_sizey,int min,int max) {
-	sizex = min + GetRand(m_sizex - min - 4);
-	sizey = min + GetRand(m_sizey - min - 4);
+	if (m_sizex < min + 4 || m_sizey < min + 4) {
+		printfDx("MakeRoom is cancelled. sectionsizex = %d, sectionsizey = %d, min = %d", m_sizex, m_sizey, min);
+		//WaitKey();
+		return;
+	}
+
+
+	/*
+	        
+	        
+	  œœœœ  
+	  œœœœ  
+	  œœœœ  
+	        
+	        
+
+	*/
+
+	if (min + m_sizex - min - 4 < max) {
+		sizex = min + GetRand(m_sizex - min - 4);
+	}
+	else {
+		sizex = min + GetRand(max - min);
+	}
+	if (min + m_sizey - min - 4 < max) {
+		sizey = min + GetRand(m_sizey - min - 4);
+	}
+	else {
+		sizey = min + GetRand(max - min);
+	}
 
 	x = m_x + 2 +GetRand(m_sizex - sizex - 4);
 	y = m_y + 2 +GetRand(m_sizey - sizey - 4);
@@ -110,6 +138,9 @@ int Room::GetY() { return y; };
 
 int Room::GetSizeX() { return sizex; };
 int Room::GetSizeY() { return sizey; };
+
+bool Room::IsMonsterhouse() { return is_monsterhouse; }
+bool Room::IsShopRoom() { return isShopRoom; }
 
 //bool Room::GetConnectionf() { return connectionf; };
 
@@ -235,6 +266,14 @@ void Room::SetY(int m_y) { y = m_y; };
 
 void Room::SetSizeX(int m_sizex) { sizex = m_sizex; };
 void Room::SetSizeY(int m_sizey) { sizey = m_sizey; };
+
+void Room::SetIsMonsterhouse(bool _is_monsterhouse) {
+	is_monsterhouse = _is_monsterhouse;
+}
+void Room::SetIsShopRoom(bool _isShopRoom) {
+	is_monsterhouse = isShopRoom;
+}
+
 
 /*
 void Room::SetConnectionf(bool m_connectionf) {
